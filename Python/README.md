@@ -1,4 +1,4 @@
-## VexBot python
+## WOPR-JR python
 
 If this doesn't work, you can find the instructions here: (https://github.com/robotpy/robotpy-wpilib)[https://github.com/robotpy/robotpy-wpilib].
 

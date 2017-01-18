@@ -1,15 +1,15 @@
-# VexBot
+# WOPR-JR
 
-[![Build Status](https://travis-ci.org/LN-STEMpunks/VexBot.svg?branch=master)](https://travis-ci.org/LN-STEMpunks/VexBot)
+Code for our 2017 Competition robot.
 
-Code for our Vex Pro robot, and this repo is used to create new robots. 
+Currently in prototype stage
 
 
 ## Getting Started
 
 Clone the repository:
 
-`git clone https://github.com/LN-STEMpunks/VexBot.git && cd VexBot`
+`git clone https://github.com/LN-STEMpunks/WOPR-JR.git && cd WOPR-JR`
 
 Now, whether you want to work on python, or java, either run `cd Python` or `cd Java`.
 
@@ -51,21 +51,6 @@ We use gradle Travis, Git, Java, and primarily VSCODE and eclipse to develop thi
 We also have a python version, which is meant to be equivelant to the java version, but more Pythonic.
 
 Ben Klein wrote most of the base, which was then refactored by Cade Brown.
-
-
-## New Robot
-
-To create a new robot, create a repo and run:
-
-``` bash
-ROBOT='Duke'
-URL="https://github.com/LN-STEMpunks/$ROBOT.git"
-git clone https://github.com/LN-STEMpunks/VexBot.git $ROBOT && cd $ROBOT
-sed -i -e "s/VexBot/$ROBOT/g" README.md
-git remote set-url origin $URL
-git push
-```
-Then, you may need to replace some other things as well.
 
 
 ## Licensing
