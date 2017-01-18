@@ -1,6 +1,4 @@
-# VexBot java
-
-No more toast! Just ANT
+# WOPR-JR Java
 
 ## Getting started
 
