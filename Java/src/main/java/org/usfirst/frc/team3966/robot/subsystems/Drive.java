@@ -25,6 +25,8 @@ public class Drive extends Subsystem {
         LB = new DriveMotor(_LB);
         RF = new DriveMotor(_RF);
         RB = new DriveMotor(_RB);
+        LB.setInverted(true);
+        LF.setInverted(true);
         robotDrive = new RobotDrive(LF, LB, RF, RB);
     }
 

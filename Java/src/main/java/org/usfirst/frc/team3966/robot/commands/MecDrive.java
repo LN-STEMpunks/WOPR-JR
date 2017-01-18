@@ -15,7 +15,7 @@ public class MecDrive extends BaseCommand {
 
     protected void execute() {
     	//note: may need to invert Y
-        Robot.drive.mecanum(Robot.controller.getAxis(EXButtons.STICK_X_AXIS), Robot.controller.getAxis(EXButtons.STICK_Y_AXIS), Robot.controller.getAxis(EXButtons.STICK_ROT_AXIS));
+        Robot.drive.mecanum(-Robot.controller.getAxis(EXButtons.STICK_X_AXIS), -Robot.controller.getAxis(EXButtons.STICK_Y_AXIS), Robot.controller.getAxis(EXButtons.STICK_ROT_AXIS));
 
     }
 }

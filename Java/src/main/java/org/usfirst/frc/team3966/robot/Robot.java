@@ -21,7 +21,7 @@ import org.usfirst.frc.team3966.robot.commands.TankDrive;
 import org.usfirst.frc.team3966.robot.commands.MecDrive;
 import org.usfirst.frc.team3966.robot.commands.StopDrive;
 import org.usfirst.frc.team3966.robot.values.IDs;
-import org.usfirst.frc.team3966.robot.hardware.PS4Controller;
+import org.usfirst.frc.team3966.robot.hardware.Controller;
 import org.usfirst.frc.team3966.util.Logger;
 
 /**
@@ -37,7 +37,7 @@ public class Robot extends IterativeRobot {
     public static Logger logger;
 
     public static Drive drive;
-    public static PS4Controller controller;
+    public static Controller controller;
 
     Command autonomousCommand;
     Command teleopCommand;
@@ -58,7 +58,7 @@ public class Robot extends IterativeRobot {
         logger = new Logger(getModuleName(), getModuleVersion());
 
         drive = new Drive(IDs.LF_motor, IDs.LB_motor, IDs.RF_motor, IDs.RB_motor);
-        controller = new PS4Controller(IDs.controller);
+        controller = new Controller(IDs.controller);
 
         // instantiate the command used for the autonomous period
         // teleopCommand = new TankDrive();

@@ -19,9 +19,10 @@ class Drive(Subsystem):
         self.RB = Motor(ids.RB_motor)
         self.RF = Motor(ids.RF_motor)
 
+        self.LB.setInverted(True)
+        self.LF.setInverted(True)
+
         self.drive_train = RobotDrive(self.LF, self.LB, self.RF, self.RB)
-        self.drive_train.setInvertedMotor(0, True)
-        self.drive_train.setInvertedMotor(1, True)
         self.drive_train.setExpiration(0.1)
 
         ## Uncomment to fail

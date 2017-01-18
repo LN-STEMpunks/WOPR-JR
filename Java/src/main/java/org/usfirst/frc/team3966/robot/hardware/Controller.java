@@ -9,12 +9,12 @@ import org.usfirst.frc.team3966.util.Logger;
  * PS4 controller wrapper for a joystick.
  * @author Matthew.Lythgoe
  */
-public class PS4Controller extends Joystick {
+public class Controller extends Joystick {
     
     private Logger ps4controller_logger;
 
     
-    public PS4Controller(int port) {
+    public Controller(int port) {
         super(port);
         ps4controller_logger = new Logger("PS4 Controller (" + port + ")");
     }
@@ -26,7 +26,7 @@ public class PS4Controller extends Joystick {
     }
 
     private double _pow_scale(double val) {
-        return _pow_scale(val, 2.5);
+        return _pow_scale(val, 2.0);
     }
     
     private double _exp_scale(double val, double base) {

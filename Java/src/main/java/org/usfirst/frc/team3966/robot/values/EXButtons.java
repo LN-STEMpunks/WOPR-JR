@@ -12,7 +12,7 @@ package org.usfirst.frc.team3966.robot.values;
 public class EXButtons {
     
 	public static final int 
-			STICK_X_AXIS = 1, 
-			STICK_Y_AXIS = 0, 
+			STICK_X_AXIS = 0, 
+			STICK_Y_AXIS = 1, 
 			STICK_ROT_AXIS = 2;
 }

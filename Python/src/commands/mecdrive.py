@@ -11,6 +11,8 @@ import subsystems
 
 from values import exbuttons
 
+from math import atan2
+
 class MecDrive(Command):
 
     def __init__(self):
@@ -23,7 +25,9 @@ class MecDrive(Command):
 
         _axis = subsystems.oi.joystick.getAxis
 
-        subsystems.drive.mecanum_cartesian(_axis(exbuttons.STICK_X_AXIS), -_axis(exbuttons.STICK_Y_AXIS), _axis(exbuttons.STICK_ROT))
+        #subsystems.drive.mecanum_polar(mag, atan2(y, x), r)
+
+        subsystems.drive.mecanum_cartesian(_axis(exbuttons.STICK_X_AXIS), _axis(exbuttons.STICK_Y_AXIS), _axis(exbuttons.STICK_ROT))
 
 
 
