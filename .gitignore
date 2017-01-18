@@ -1,0 +1,51 @@
+Java/.nb-gradle/
+
+# WPILib
+Java/bin/
+Java/build/
+Java/dist/
+Java/sysProps.xml
+Java/workbench.xmi
+
+# IDE
+Java/*.ipr
+Java/*.iml
+Java/*.iws
+Java/out/
+Java/tmp/
+Java/.settings/
+Java/.loadpath
+Java/.project
+/.idea
+Java/.classpath
+Java/.vscode/*
+
+# Toast/GradleRIO
+Java/run/
+Java/.gradle/
+Java/gradle/.launch/
+
+# OS Files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.AppleDouble
+.LSOverride
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# backup files
+*~
+
+# directory for XML generated after running junit tests through ant
+Java/junit/
+
+# python
+
+*.pyc
+*__pycache__*
+*.pyo
+
+.vscode/*

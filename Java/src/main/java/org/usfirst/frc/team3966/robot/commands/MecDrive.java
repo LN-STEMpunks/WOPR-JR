@@ -2,24 +2,20 @@ package org.usfirst.frc.team3966.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 import org.usfirst.frc.team3966.robot.Robot;
-import org.usfirst.frc.team3966.robot.values.PS4Buttons;
+import org.usfirst.frc.team3966.robot.values.EXButtons;
 
 /**
  *
  */
 public class MecDrive extends BaseCommand {
 
-    public TankDrive() {
+    public MecDrive() {
         super(Robot.drive);
     }
 
     protected void execute() {
-        Robot.drive.drive(Robot.controller.getAxis(PS4Buttons.STICK_LEFT_Y_AXIS), Robot.controller.getAxis(PS4Buttons.STICK_RIGHT_Y_AXIS));
+    	//note: may need to invert Y
+        Robot.drive.mecanum(Robot.controller.getAxis(EXButtons.STICK_X_AXIS), Robot.controller.getAxis(EXButtons.STICK_Y_AXIS), Robot.controller.getAxis(EXButtons.STICK_ROT_AXIS));
 
-        if (Robot.controller.getButton(PS4Buttons.CIRCLE)) {
-            Robot.drive.enablePCM();
-        } else if (Robot.controller.getButton(PS4Buttons.X)) {
-            Robot.drive.disablePCM();
-        }
     }
 }

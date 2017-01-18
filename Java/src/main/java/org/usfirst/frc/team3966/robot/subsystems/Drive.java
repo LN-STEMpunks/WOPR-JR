@@ -2,7 +2,6 @@ package org.usfirst.frc.team3966.robot.subsystems;
 
 //import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.DriverStation;
-import org.usfirst.frc.team3966.robot.hardware.PCM;
 import org.usfirst.frc.team3966.robot.hardware.DriveMotor;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import org.usfirst.frc.team3966.robot.commands.TankDrive;
@@ -20,16 +19,16 @@ public class Drive extends Subsystem {
     
     private Logger drive_log;
     
-    public Drive(int _LF, int _LB, int _RB, int _RF) {
+    public Drive(int _LF, int _LB, int _RF, int _RB) {
         drive_log = new Logger("Drive Subsystem");
-        LB = new DriveMotor(_LB);
         LF = new DriveMotor(_LF);
-        RB = new DriveMotor(_RB);
+        LB = new DriveMotor(_LB);
         RF = new DriveMotor(_RF);
+        RB = new DriveMotor(_RB);
         robotDrive = new RobotDrive(LF, LB, RF, RB);
     }
 
-    private DriveMotor LB, LF, RB. RF;
+    private DriveMotor LB, LF, RB, RF;
     private RobotDrive robotDrive;
 
     public void initDefaultCommand() {
@@ -38,15 +37,15 @@ public class Drive extends Subsystem {
     }
 
     public void stop() {
-        drive(0, 0);
+        robotDrive.tankDrive(0, 0);
     }
     
-    public void drive(double L_speed, double R_speed) {
-        LB.set(L_speed);
-        LF.set(L_speed);
-        
-        RB.set(R_speed);
-        RF.set(R_speed);
+    public void tank(double L_speed, double R_speed) {
+    	robotDrive.tankDrive(L_speed, R_speed);
+    }
+    
+    public void mecanum(double X_speed, double Y_speed, double R_speed) {
+    	robotDrive.mecanumDrive_Cartesian(X_speed, Y_speed, R_speed, 0);
     }
     
 

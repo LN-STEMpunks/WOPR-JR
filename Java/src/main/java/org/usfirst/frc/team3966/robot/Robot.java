@@ -57,7 +57,7 @@ public class Robot extends IterativeRobot {
     public void robotInit() {
         logger = new Logger(getModuleName(), getModuleVersion());
 
-        drive = new Drive();
+        drive = new Drive(IDs.LF_motor, IDs.LB_motor, IDs.RF_motor, IDs.RB_motor);
         controller = new PS4Controller(IDs.controller);
 
         // instantiate the command used for the autonomous period
