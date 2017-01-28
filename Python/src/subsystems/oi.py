@@ -18,8 +18,8 @@ from values import ids
 
 class OI(Subsystem):
 
-    def __init__(self):
+	def __init__(self):
 
-        super().__init__('OI')
+		super().__init__('OI')
 
-        self.joystick = controller.Controller(ids.controller)
+		self.joystick = controller.Controller(ids.controller)

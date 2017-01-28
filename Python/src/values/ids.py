@@ -18,3 +18,4 @@ PCM_node = 0
 PCM_pin0 = 0
 PCM_pin1 = 1
 
+ULTRASONIC0 = 0

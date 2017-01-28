@@ -13,17 +13,17 @@ from values import ps4buttons
 
 class TankDrive(Command):
 
-    def __init__(self):
-        super().__init__('TankDrive')
+	def __init__(self):
+		super().__init__('TankDrive')
 
-        self.requires(subsystems.drive)
+		self.requires(subsystems.drive)
 
 
-    def execute(self):
+	def execute(self):
 
-        _axis = subsystems.oi.joystick.getAxis
+		_axis = subsystems.oi.joystick.getAxis
 
-        subsystems.drive.tank(_axis(ps4buttons.STICK_LEFT_Y_AXIS), _axis(ps4buttons.STICK_RIGHT_Y_AXIS))
+		subsystems.drive.tank(_axis(ps4buttons.STICK_LEFT_Y_AXIS), _axis(ps4buttons.STICK_RIGHT_Y_AXIS))
 
 
 

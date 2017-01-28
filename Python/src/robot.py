@@ -29,28 +29,28 @@ from commands.autonomous import Autonomous
 
 class Robot(CommandBasedRobot):
 
-    def getModuleName(self):
-        return "WOPR-JR"
+	def getModuleName(self):
+		return "WOPR-JR"
 
-    def getVersion(self):
-        return "0.0.0-py"
+	def getVersion(self):
+		return "0.0.0-py"
 
-    def robotInit(self):
-        subsystems.init()
+	def robotInit(self):
+		subsystems.init()
 
-        #self.teleopCommand = TankDrive()
-        self.teleopCommand = MecDrive()
-        self.autonomousCommand = Autonomous()
+		#self.teleopCommand = TankDrive()
+		self.teleopCommand = MecDrive()
+		self.autonomousCommand = Autonomous()
 
 
-    def autonomousInit(self):
-        self.autonomousCommand.cancel()
-        self.autonomousCommand.start()
+	def autonomousInit(self):
+		self.autonomousCommand.cancel()
+		self.autonomousCommand.start()
 
-    def teleopInit(self):
-        self.autonomousCommand.cancel()
-        self.teleopCommand.start()
+	def teleopInit(self):
+		self.autonomousCommand.cancel()
+		self.teleopCommand.start()
 
 
 if __name__ == '__main__':
-    wpilib.run(Robot)
+	wpilib.run(Robot)

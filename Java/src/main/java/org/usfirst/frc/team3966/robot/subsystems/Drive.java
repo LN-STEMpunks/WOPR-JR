@@ -8,6 +8,8 @@ import org.usfirst.frc.team3966.robot.commands.TankDrive;
 import org.usfirst.frc.team3966.robot.values.IDs;
 import org.usfirst.frc.team3966.util.Logger;
 import edu.wpi.first.wpilibj.RobotDrive;
+import edu.wpi.first.wpilibj.Ultrasonic;
+import edu.wpi.first.wpilibj.AnalogInput;
 
 /**
  * Drive subsystem, controls left and right motors.
@@ -19,8 +21,16 @@ public class Drive extends Subsystem {
     
     private Logger drive_log;
     
+	public AnalogInput sensor;
+
     public Drive(int _LF, int _LB, int _RF, int _RB) {
         drive_log = new Logger("Drive Subsystem");
+		sensor = new AnalogInput(0);
+		sensor.setOversampleBits(4);
+		sensor.setAverageBits(2);
+		sensor.setGlobalSampleRate(62500);
+		
+		//sensor.setAutomaticMode(true);
         LF = new DriveMotor(_LF);
         LB = new DriveMotor(_LB);
         RF = new DriveMotor(_RF);
