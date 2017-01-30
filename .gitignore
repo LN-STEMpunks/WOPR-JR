@@ -14,11 +14,10 @@ out/
 tmp/
 .settings/
 .loadpath
-.project
-.idea
-.classpath
+#.project
+#.classpath
 .vscode/
-
+.idea
 
 # OS Files
 .DS_Store
