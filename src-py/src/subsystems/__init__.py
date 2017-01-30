@@ -4,14 +4,17 @@ from wpilib.resource import Resource
 
 from .drive import Drive
 from .oi import OI
-from .sensors import Sensors
+
+from values import ids
+
+from hardware.distancesensor import DistanceSensor
 
 drive = None
 oi = None
-sensors = None
+ultrasonic = None
 
 def init():
-	global drive, oi, sensors
+	global drive, oi, ultrasonic
 
 
 	if oi is not None and not RobotBase.isSimulation():
@@ -21,4 +24,4 @@ def init():
 
 	oi = OI()
 
-	sensors = Sensors()
+	ultrasonic = DistanceSensor(ids.ultrasonic_0)

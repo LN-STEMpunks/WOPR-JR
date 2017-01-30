@@ -1,6 +1,7 @@
 package frc3966.robot.subsystems;
 
 import frc3966.robot.hardware.DistanceSensor;
+import frc3966.robot.values.IDs;
 
 public class Subsystems {
 
@@ -11,6 +12,6 @@ public class Subsystems {
 	public Subsystems() {
 		drive = new Drive();
 		OI = new OI();
-		ultrasonic = new DistanceSensor();
+		ultrasonic = new DistanceSensor(IDs.ultrasonic_0);
 	}
 }

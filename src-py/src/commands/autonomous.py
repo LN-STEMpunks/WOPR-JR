@@ -22,7 +22,7 @@ class Autonomous(CommandGroup):
 
 	def __init__(self):
 		super().__init__('Autonomous Program')
-		pw = .25
+		pw = .75
 		tm = 1
 		# circle pattern
 		self.addSequential(TankDriveTimed(pw, pw, tm))

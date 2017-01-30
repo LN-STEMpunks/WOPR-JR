@@ -20,7 +20,6 @@ public class OI extends Subsystem {
 
 	@Override
 	protected void initDefaultCommand() {
-		// needed method
-		
+		// needed method	
 	}
 }

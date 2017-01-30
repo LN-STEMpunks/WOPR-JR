@@ -1,7 +1,6 @@
 package frc3966.robot.hardware;
 
 
-import frc3966.robot.values.IDs;
 import edu.wpi.first.wpilibj.AnalogInput;
 
 public class DistanceSensor extends AnalogInput {
@@ -9,8 +8,8 @@ public class DistanceSensor extends AnalogInput {
 	// millivolts per meter
 	private double MV_PER_M = 100 * 4.9;
 	
-	public DistanceSensor() {
-		super(IDs.ultrasonic_0);
+	public DistanceSensor(int id) {
+		super(id);
 		setOversampleBits(4);
 		setAverageBits(2);
 		setGlobalSampleRate(62500);
