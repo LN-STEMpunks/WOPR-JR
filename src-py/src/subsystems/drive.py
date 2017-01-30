@@ -32,6 +32,8 @@ class Drive(Subsystem):
 		#self.pcm0 = Solenoid(ids.PCM_pin0)  
 		#self.pcm1 = Solenoid(ids.PCM_pin1)
 
+	def stop(self):
+		self.tank(0, 0)
 
 	def tank(self, L_speed, R_speed):
 		self.drive_train.tankDrive(L_speed, R_speed, squaredInputs=False)

@@ -23,4 +23,4 @@ On all platforms, use:
 
 or, to test the build, run:
 
-`ant build`
+`ant`
