@@ -14,9 +14,9 @@ public class OI extends Subsystem {
 
 	public Controller controller;
 
-    public OI() {
+	public OI() {
 		controller = new Controller(IDs.controller);
-    }
+	}
 
 	@Override
 	protected void initDefaultCommand() {

@@ -14,37 +14,37 @@ import edu.wpi.first.wpilibj.RobotDrive;
  */
 public class Drive extends Subsystem {
 
-    public Drive() {
-        LF = new DriveMotor(IDs.LF_motor);
-        LB = new DriveMotor(IDs.LB_motor);
-        RF = new DriveMotor(IDs.RF_motor);
-        RB = new DriveMotor(IDs.RB_motor);
-        LB.setInverted(true);
-        LF.setInverted(true);
-        robotDrive = new RobotDrive(LF, LB, RF, RB);
-    }
+	public Drive() {
+		LF = new DriveMotor(IDs.LF_motor);
+		LB = new DriveMotor(IDs.LB_motor);
+		RF = new DriveMotor(IDs.RF_motor);
+		RB = new DriveMotor(IDs.RB_motor);
+		LB.setInverted(true);
+		LF.setInverted(true);
+		robotDrive = new RobotDrive(LF, LB, RF, RB);
+	}
 
-    private DriveMotor LB, LF, RB, RF;
-    private RobotDrive robotDrive;
+	private DriveMotor LB, LF, RB, RF;
+	private RobotDrive robotDrive;
 
-    public void initDefaultCommand() {
+	public void initDefaultCommand() {
 
-        setDefaultCommand(new TankDrive());
-    }
+		setDefaultCommand(new TankDrive());
+	}
 
-    public void stop() {
-        tank(0, 0);
-    }
-    
-    public void tank(double L_speed, double R_speed) {
-    	robotDrive.tankDrive(L_speed, R_speed);
-    }
-    
-    public void mecanum_cartesian(double X_speed, double Y_speed, double R_speed) {
-    	robotDrive.mecanumDrive_Cartesian(X_speed, Y_speed, R_speed, 0);
-    }
-    public void mecanum_polar(double _speed, double _direction, double R_speed) {
-    	robotDrive.mecanumDrive_Polar(_speed, _direction, R_speed);
-    }
+	public void stop() {
+		tank(0, 0);
+	}
+	
+	public void tank(double L_speed, double R_speed) {
+		robotDrive.tankDrive(L_speed, R_speed);
+	}
+	
+	public void mecanum_cartesian(double X_speed, double Y_speed, double R_speed) {
+		robotDrive.mecanumDrive_Cartesian(X_speed, Y_speed, R_speed, 0);
+	}
+	public void mecanum_polar(double _speed, double _direction, double R_speed) {
+		robotDrive.mecanumDrive_Polar(_speed, _direction, R_speed);
+	}
 
 }
