@@ -17,8 +17,9 @@ public class DistanceSensor extends AnalogInput {
 	}
 
 	// returns distance in meters
+	// Is finicky, try debugging it
 	public double getDistance() {
-		double millivolts = getVoltage() * 1000.0;
+		double millivolts = getAverageVoltage() * 1000.0;
 		return millivolts / MV_PER_M;
 	}
 }

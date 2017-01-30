@@ -2,7 +2,7 @@ package frc3966.robot.subsystems;
 
 import frc3966.robot.hardware.DriveMotor;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import frc3966.robot.commands.TankDrive;
+import frc3966.robot.commands.MecDrive;
 import frc3966.robot.values.IDs;
 import edu.wpi.first.wpilibj.RobotDrive;
 
@@ -28,8 +28,7 @@ public class Drive extends Subsystem {
 	private RobotDrive robotDrive;
 
 	public void initDefaultCommand() {
-
-		setDefaultCommand(new TankDrive());
+		setDefaultCommand(new MecDrive());
 	}
 
 	public void stop() {

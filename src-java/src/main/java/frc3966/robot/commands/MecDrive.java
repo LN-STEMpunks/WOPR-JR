@@ -15,13 +15,9 @@ public class MecDrive extends BaseCommand {
 
 	protected void execute() {
 		// print out debug info
-		System.out.printf(
-				"predicted distance: %3.1f volts: %3.1f avgVolts: %3.1f value: %d avgValue: %d\n", 
-				Robot.subsystems.ultrasonic.getDistance(), 
-				Robot.subsystems.ultrasonic.getVoltage(), 
-				Robot.subsystems.ultrasonic.getAverageVoltage(), 
-				Robot.subsystems.ultrasonic.getValue(), 
-				Robot.subsystems.ultrasonic.getAverageValue());
+		//System.out.printf(
+		//		"predicted distance: %3.3f\n", 
+		Robot.subsystems.ultrasonic.getDistance());
 		
 		
 		Robot.subsystems.drive.mecanum_cartesian(
