@@ -11,7 +11,7 @@ Clone the repository:
 
 `git clone https://github.com/LN-STEMpunks/WOPR-JR.git && cd WOPR-JR`
 
-Now, whether you want to work on python, or java, either run `cd Python` or `cd Java`.
+Now, whether you want to work on python, or java, either run `cd src-py` or `cd src-java`.
 
 Now, to see instructions for that language, view the README.md in that subfolder.
 
@@ -24,14 +24,15 @@ We will push straight to master. But, before you do, make sure the code runs.
 
 You can test these with:
 
-`python3 Python/src/robot.py test` or replace `test` with `sim` to simulate
+`python3 src/robot.py test` or replace `test` with `sim` to simulate
 
 Or, for downtrodden Windows users:
 
-`py Python/src/robot.py deploy`
+`py src/robot.py deploy`
 
 
-`cd Java && ant deploy`
+
+`cd src-java && ant deploy`
 
 If these run fine, then run:
 
@@ -46,7 +47,7 @@ If these run fine, then run:
 
 Written by the [L&N STEMpunks](http://lnstempunks.org). More specifically, the [programming team](http://programming.lnstempunks.org).
 
-We use gradle Travis, Git, Java, and primarily VSCODE and eclipse to develop this.
+We use Travis, Git, Java, Python3, and primarily VSCODE and eclipse to develop this.
 
 We also have a python version, which is meant to be equivelant to the java version, but more Pythonic.
 
