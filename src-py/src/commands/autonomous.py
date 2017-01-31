@@ -4,32 +4,26 @@ Autonomous program
 
 Current goal:
 
-  * Go in circle
-  * Enter other stuff here
+  * Drive forward, strafe left, strafe right, drive back
 
 
 Problems:
 
-  * doesn't go in circle
-  * something else
 
 """
 from wpilib.command.commandgroup import CommandGroup
 
-from commands.tankdrivetimed import TankDriveTimed
+#from commands.tankdrivetimed import TankDriveTimed
+from commands.mecdrivetimed import MecDriveTimed
 
 class Autonomous(CommandGroup):
 
 	def __init__(self):
 		super().__init__('Autonomous Program')
-		pw = .75
-		tm = 1
-		# circle pattern
-		self.addSequential(TankDriveTimed(pw, pw, tm))
-		self.addSequential(TankDriveTimed(-pw, pw, tm))
-		self.addSequential(TankDriveTimed(pw, pw, tm))
-		self.addSequential(TankDriveTimed(-pw, pw, tm))
-		self.addSequential(TankDriveTimed(pw, pw, tm))
-		self.addSequential(TankDriveTimed(-pw, pw, tm))
-		self.addSequential(TankDriveTimed(pw, pw, tm))
-		self.addSequential(TankDriveTimed(-pw, pw, tm))
+		pw = .15
+		tm = 1.2
+
+		self.addSequential(MecDriveTimed(0, pw, tm))
+		self.addSequential(MecDriveTimed(3*-pw, 0, tm))
+		self.addSequential(MecDriveTimed(3*pw, 0, tm))
+		self.addSequential(MecDriveTimed(0, -pw, tm))
