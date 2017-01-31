@@ -17,7 +17,7 @@ public class MecDrive extends BaseCommand {
 		// print out debug info
 		//System.out.printf(
 		//		"predicted distance: %3.3f\n", 
-		Robot.subsystems.ultrasonic.getDistance());
+		//Robot.subsystems.ultrasonic.getDistance());
 		
 		
 		Robot.subsystems.drive.mecanum_cartesian(
