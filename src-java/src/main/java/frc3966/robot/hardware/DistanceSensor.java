@@ -1,5 +1,5 @@
 package frc3966.robot.hardware;
-
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import edu.wpi.first.wpilibj.AnalogInput;
 
@@ -13,7 +13,7 @@ public class DistanceSensor extends AnalogInput {
 		setOversampleBits(4);
 		setAverageBits(2);
 		setGlobalSampleRate(62500);
-		
+		//SmartDashboard.putNumber("Distance Sensor", DistanceSensor.getDistance());
 	}
 
 	// returns distance in meters
@@ -23,3 +23,4 @@ public class DistanceSensor extends AnalogInput {
 		return millivolts / MV_PER_M;
 	}
 }
+

@@ -80,11 +80,12 @@ public class Robot extends IterativeRobot {
 
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
+		subsystems.dumpInfo();
 	}
 
 	public void disabledPeriodic() {
 		Scheduler.getInstance().run();
 		subsystems.drive.stop();
 	}
-
+	
 }
