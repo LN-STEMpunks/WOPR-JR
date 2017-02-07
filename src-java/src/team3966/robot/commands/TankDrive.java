@@ -1,9 +1,9 @@
-package frc3966.robot.commands;
+package team3966.robot.commands;
 
-import frc3966.robot.Robot;
-import frc3966.robot.hardware.Controller;
-import frc3966.robot.subsystems.Subsystems;
-import frc3966.robot.values.PS4Buttons;
+import team3966.robot.Robot;
+import team3966.robot.hardware.Controller;
+import team3966.robot.subsystems.Subsystems;
+import team3966.robot.values.PS4Buttons;
 
 
 public class TankDrive extends BaseCommand {

@@ -2,7 +2,7 @@
  * 2017-01-06
  *   - Created class, migrating from OI.java, with renames
  */
-package frc3966.robot.values;
+package team3966.robot.values;
 
 /**
  * PINs of controllers, motor controllers, PCMs, etc.

@@ -1,6 +1,6 @@
-package frc3966.robot.commands;
+package team3966.robot.commands;
 
-import frc3966.robot.Robot;
+import team3966.robot.Robot;
 
 /**
  * Stops the Drive subsystem by setting all motors to 0.0

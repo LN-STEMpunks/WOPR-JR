@@ -1,9 +1,9 @@
-package frc3966.robot.subsystems;
+package team3966.robot.subsystems;
 
-import frc3966.robot.hardware.DriveMotor;
-import frc3966.robot.values.IDs;
+import team3966.robot.hardware.DriveMotor;
+import team3966.robot.values.IDs;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import frc3966.robot.commands.TankDrive;
+import team3966.robot.commands.TankDrive;
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDOutput;
 import edu.wpi.first.wpilibj.PIDSource;

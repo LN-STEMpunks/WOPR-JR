@@ -1,4 +1,4 @@
-package frc3966.math.complex;
+package team3966.math.complex;
 
 /**
  * Complex number.

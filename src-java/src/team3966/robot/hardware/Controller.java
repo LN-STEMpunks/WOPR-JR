@@ -1,4 +1,4 @@
-package frc3966.robot.hardware;
+package team3966.robot.hardware;
 
 
 import edu.wpi.first.wpilibj.Joystick;

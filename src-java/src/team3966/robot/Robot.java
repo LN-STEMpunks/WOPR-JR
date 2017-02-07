@@ -10,15 +10,16 @@ Website:
 	programming.lnstempunks.org (or ln-stempunks.github.io)
 
  */
-package frc3966.robot;
+package team3966.robot;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 
-import frc3966.robot.subsystems.Subsystems;
-import frc3966.robot.commands.MecDrive;
-import frc3966.robot.commands.StopDrive;
+import team3966.robot.subsystems.Subsystems;
+import team3966.robot.commands.MecDrive;
+import team3966.robot.commands.StopDrive;
+import team3966.robot.commands.TankDrive;
 
 /**
  * Our 2017 robot code
@@ -38,7 +39,7 @@ public class Robot extends IterativeRobot {
 		subsystems = new Subsystems();
 
 		// teleopCommand = new TankDrive();
-		teleopCommand = new MecDrive();
+		teleopCommand = new TankDrive();
 
 		// stay still during autonomous
 		autonomousCommand = new StopDrive();

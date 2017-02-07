@@ -1,7 +1,7 @@
-package frc3966.robot.subsystems;
+package team3966.robot.subsystems;
 
-import frc3966.robot.hardware.DistanceSensor;
-import frc3966.robot.values.IDs;
+import team3966.robot.hardware.DistanceSensor;
+import team3966.robot.values.IDs;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class Subsystems {
 

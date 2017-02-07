@@ -8,10 +8,13 @@ First, set up your work environment:
 
 Follow instructions [here](https://wpilib.screenstepslive.com/s/4485/m/13809/l/599681-installing-eclipse-c-java)
 
+Now, open with: 
+
 
 ### NetBeans
 
 First, follow instructions for eclipse, then follow [this](https://netbeans.org/kb/74/java/import-eclipse.html)
+
 
 ## Deploying
 

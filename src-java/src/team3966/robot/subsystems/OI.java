@@ -1,8 +1,8 @@
-package frc3966.robot.subsystems;
+package team3966.robot.subsystems;
 
-import frc3966.robot.hardware.Controller;
+import team3966.robot.hardware.Controller;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import frc3966.robot.values.IDs;
+import team3966.robot.values.IDs;
 
 /**
  * Drive subsystem, controls left and right motors.
