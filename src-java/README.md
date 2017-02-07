@@ -8,7 +8,13 @@ First, set up your work environment:
 
 Follow instructions [here](https://wpilib.screenstepslive.com/s/4485/m/13809/l/599681-installing-eclipse-c-java)
 
-Now, open with: 
+Now, open with: `File -> New -> Project`
+
+Now, select `Java Project from Existing Ant Buildfile`
+
+Set the name to `WOPR-JR`, and navigate to this folder (the README.md is) and add the `build.xml` as the Ant buildfile.
+
+You're done!
 
 
 ### NetBeans
