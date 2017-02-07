@@ -1,8 +1,11 @@
 package team3966.robot.subsystems;
 
+
 import team3966.robot.hardware.DriveMotor;
+import team3966.robot.hardware.MotorEncoder;
 import team3966.robot.values.IDs;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import team3966.robot.commands.TankDrive;
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDOutput;
@@ -30,17 +33,14 @@ public class Drive extends Subsystem {
 			motors[0] = a; motors[1] = b;
 		}
 
-		@Override
 		public PIDSourceType getPIDSourceType() {
 			return sourceType;
 		}
 
-		@Override
 		public double pidGet() {
 			return (motors[0].getSpeed() + motors[1].getSpeed()) / 2.0;
 		}
 
-		@Override
 		public void setPIDSourceType(PIDSourceType arg0) {
 			sourceType = PIDSourceType.kRate;
 			
@@ -57,7 +57,6 @@ public class Drive extends Subsystem {
 			outputs = _outputs;
 		}
 
-		@Override
 		public void pidWrite(double speed) {
 			for (PIDOutput output : outputs) {
 				output.pidWrite(speed);
@@ -73,11 +72,16 @@ public class Drive extends Subsystem {
 	public static final double kI = 0.0;
 	public static final double kD = 0.0;
 	
-	private DriveMotor L0, L1, R0, R1;
+	public DriveMotor L0, L1, R0, R1;
+	public MotorEncoder L, R;
+	
 	private RobotDrive robotDrive;
 	
 	public Drive(boolean _usePID) {
 		usePID = _usePID;
+		L = new MotorEncoder(IDs.L_encoder_dio_A, IDs.L_encoder_dio_B);
+		R = new MotorEncoder(IDs.R_encoder_dio_A, IDs.R_encoder_dio_B);
+		
 		L0 = new DriveMotor(IDs.L0_motor);
 		L1 = new DriveMotor(IDs.L1_motor);
 		R0 = new DriveMotor(IDs.R0_motor);
@@ -99,9 +103,9 @@ public class Drive extends Subsystem {
 			pid_control[1] = new PIDController(kP, kI, kD, R_source, R_out);
 			
 			for (PIDController pid_c : pid_control) {
-				pid_c.setAbsoluteTolerance(DriveMotor.MAX_TOLERANCE);
-				pid_c.setInputRange(-1.0, 1.0);
-				pid_c.setOutputRange(-DriveMotor.MAX_SPEED, DriveMotor.MAX_SPEED);
+				pid_c.setAbsoluteTolerance(MotorEncoder.MAX_TOLERANCE);
+				pid_c.setInputRange(-MotorEncoder.MAX_SPEED, MotorEncoder.MAX_SPEED);
+				pid_c.setOutputRange(-MotorEncoder.MAX_SPEED, MotorEncoder.MAX_SPEED);
 			}
 		}
 	}
@@ -126,10 +130,13 @@ public class Drive extends Subsystem {
 	
 	// inputs should be between +-DriveMotor.MAX_SPEED
 	public void tank_speed(double L_speed, double R_speed) {
+
+		SmartDashboard.putData("Left PID", pid_control[0]);
 		if (!usePID) {
 			System.out.printf("ERROR: Trying to use speed when PID is not being used!\n");
 			return;
 		}
+		
 		pid_control[0].setSetpoint(L_speed);
 		pid_control[1].setSetpoint(R_speed);
 	}

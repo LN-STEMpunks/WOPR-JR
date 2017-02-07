@@ -13,15 +13,17 @@ public class IDs {
 	public static final int controller = 0;
 
 	public static final int L0_motor = 0;
-	public static final int L1_motor = 2;
+	public static final int L1_motor = 3;
 	
 	public static final int R0_motor = 1;
-	public static final int R1_motor = 3;
+	public static final int R1_motor = 2;
 
 	// Not sure if we are using 2 or 4 encoders. Make sure to change in Drive.java
 	// these are probably DIO pins, in A/B order
-	public static final int[] L_encoder_dio = {0, 1};
-	public static final int[] R_encoder_dio = {2, 3};
+	public static final int L_encoder_dio_A = 1;
+	public static final int L_encoder_dio_B = 0;
+	public static final int R_encoder_dio_A = 3;
+	public static final int R_encoder_dio_B = 2;
 	
 	
 	// not sure if we are using this

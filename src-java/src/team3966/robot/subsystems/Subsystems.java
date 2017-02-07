@@ -10,7 +10,7 @@ public class Subsystems {
 	public DistanceSensor ultrasonic;
 	
 	public Subsystems() {
-		drive = new Drive();
+		drive = new Drive(false);
 		OI = new OI();
 		ultrasonic = new DistanceSensor(IDs.ultrasonic_0);
 	}
@@ -19,5 +19,7 @@ public class Subsystems {
 		SmartDashboard.putNumber("Distance Sensor", ultrasonic.getDistance());
 		SmartDashboard.putNumber("Average Volts", ultrasonic.getAverageVoltage());
 		SmartDashboard.putNumber("Volts", ultrasonic.getVoltage());
+		SmartDashboard.putNumber("L Encoder", drive.L.getRaw());
+		SmartDashboard.putNumber("R Encoder", drive.R.getRaw());
 	}
 }

@@ -1,9 +1,10 @@
 package team3966.robot.commands;
 
 import team3966.robot.Robot;
-import team3966.robot.hardware.Controller;
+import team3966.robot.hardware.DriveMotor;
 import team3966.robot.subsystems.Subsystems;
 import team3966.robot.values.PS4Buttons;
+import team3966.robot.hardware.Controller;
 
 
 public class TankDrive extends BaseCommand {
@@ -19,7 +20,8 @@ public class TankDrive extends BaseCommand {
 
 	protected void execute() {
 		//System.out.printf("ERROR: This robot only does mecanum drives\n");
-		//systems.drive.tank(cont.getAxis(PS4Buttons.STICK_LEFT_Y_AXIS), cont.getAxis(PS4Buttons.STICK_RIGHT_Y_AXIS));
+		systems.drive.tank_power(cont.getAxis(PS4Buttons.STICK_LEFT_Y_AXIS), cont.getAxis(PS4Buttons.STICK_RIGHT_Y_AXIS));
+		//systems.drive.tank_speed(cont.getAxis(PS4Buttons.STICK_LEFT_Y_AXIS)*DriveMotor.MAX_SPEED, cont.getAxis(PS4Buttons.STICK_RIGHT_Y_AXIS)*DriveMotor.MAX_SPEED);
 	}
 
 }

@@ -1,5 +1,4 @@
 package team3966.robot.hardware;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import edu.wpi.first.wpilibj.AnalogInput;
 
