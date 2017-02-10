@@ -20,10 +20,10 @@ public class IDs {
 
 	// Not sure if we are using 2 or 4 encoders. Make sure to change in Drive.java
 	// these are probably DIO pins, in A/B order
-	public static final int L_encoder_dio_A = 1;
-	public static final int L_encoder_dio_B = 0;
-	public static final int R_encoder_dio_A = 3;
-	public static final int R_encoder_dio_B = 2;
+	public static final int L_encoder_dio_A = 3;
+	public static final int L_encoder_dio_B = 2;
+	public static final int R_encoder_dio_A = 1;
+	public static final int R_encoder_dio_B = 0;
 	
 	
 	// not sure if we are using this

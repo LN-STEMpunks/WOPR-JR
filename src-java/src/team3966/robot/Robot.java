@@ -17,9 +17,11 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 
 import team3966.robot.subsystems.Subsystems;
+import team3966.robot.commands.Autonomous;
 import team3966.robot.commands.MecDrive;
 import team3966.robot.commands.StopDrive;
 import team3966.robot.commands.TankDrive;
+import team3966.robot.commands.TankDriveTimed;
 
 /**
  * Our 2017 robot code
@@ -42,7 +44,7 @@ public class Robot extends IterativeRobot {
 		teleopCommand = new TankDrive();
 
 		// stay still during autonomous
-		autonomousCommand = new StopDrive();
+		autonomousCommand = new Autonomous();
 	}
 
 	/*
@@ -77,6 +79,7 @@ public class Robot extends IterativeRobot {
 	 */
 	public void autonomousPeriodic() {
 		Scheduler.getInstance().run();
+		subsystems.dumpInfo();
 	}
 
 	public void teleopPeriodic() {
@@ -87,6 +90,7 @@ public class Robot extends IterativeRobot {
 	public void disabledPeriodic() {
 		Scheduler.getInstance().run();
 		subsystems.drive.stop();
+		subsystems.dumpInfo();
 	}
 	
 }

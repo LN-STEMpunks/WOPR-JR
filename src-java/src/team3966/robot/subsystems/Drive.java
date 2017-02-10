@@ -3,6 +3,8 @@ package team3966.robot.subsystems;
 
 import team3966.robot.hardware.DriveMotor;
 import team3966.robot.hardware.MotorEncoder;
+import team3966.robot.pidcontrollers.PIDOutputArray;
+import team3966.robot.pidcontrollers.SpeedPID;
 import team3966.robot.values.IDs;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -22,53 +24,11 @@ import edu.wpi.first.wpilibj.RobotDrive;
 
 public class Drive extends Subsystem {
 	
-	// this is essentially to get encoder values
-	private class DrivePID implements PIDSource {
-		
-		private DriveMotor[] motors;
-		private PIDSourceType sourceType;
-		
-		public DrivePID(DriveMotor a, DriveMotor b) {
-			motors = new DriveMotor[2];
-			motors[0] = a; motors[1] = b;
-		}
-
-		public PIDSourceType getPIDSourceType() {
-			return sourceType;
-		}
-
-		public double pidGet() {
-			return (motors[0].getSpeed() + motors[1].getSpeed()) / 2.0;
-		}
-
-		public void setPIDSourceType(PIDSourceType arg0) {
-			sourceType = PIDSourceType.kRate;
-			
-		}
-	}
-	
-	// Essentially forwards output to a number of other PIDOutput objects
-	private class PIDOutputArray implements PIDOutput {
-		
-		private PIDOutput[] outputs;
-		
-		
-		public PIDOutputArray(PIDOutput... _outputs) {
-			outputs = _outputs;
-		}
-
-		public void pidWrite(double speed) {
-			for (PIDOutput output : outputs) {
-				output.pidWrite(speed);
-			}
-		}
-	}
-	
 	private boolean usePID;
 	private PIDController[] pid_control;
 
 	// Constants for https://en.wikipedia.org/wiki/PID_controller
-	public static final double kP = 0.3;
+	public static final double kP = 0.1;
 	public static final double kI = 0.0;
 	public static final double kD = 0.0;
 	
@@ -86,6 +46,9 @@ public class Drive extends Subsystem {
 		L1 = new DriveMotor(IDs.L1_motor);
 		R0 = new DriveMotor(IDs.R0_motor);
 		R1 = new DriveMotor(IDs.R1_motor);
+		
+		
+		R.setReverseDirection(true);
 
 		
 		//L0.setInverted(true);
@@ -94,10 +57,10 @@ public class Drive extends Subsystem {
 		
 		if (usePID) {
 			pid_control = new PIDController[2];
-			DrivePID L_source = new DrivePID(L0, L1);
-			DrivePID R_source = new DrivePID(R0, R1);
-			PIDOutputArray L_out = new PIDOutputArray(L0, L1);
-			PIDOutputArray R_out = new PIDOutputArray(R0, R1);
+			SpeedPID L_source = new SpeedPID(-1.0, L);
+			SpeedPID R_source = new SpeedPID(-1.0, R);
+			PIDOutputArray L_out = new PIDOutputArray(1.0, L0, L1);
+			PIDOutputArray R_out = new PIDOutputArray(-1.0, R0, R1);
 			
 			pid_control[0] = new PIDController(kP, kI, kD, L_source, L_out);
 			pid_control[1] = new PIDController(kP, kI, kD, R_source, R_out);
@@ -107,6 +70,7 @@ public class Drive extends Subsystem {
 				pid_c.setInputRange(-MotorEncoder.MAX_SPEED, MotorEncoder.MAX_SPEED);
 				pid_c.setOutputRange(-MotorEncoder.MAX_SPEED, MotorEncoder.MAX_SPEED);
 			}
+			
 		}
 	}
 	
@@ -121,6 +85,9 @@ public class Drive extends Subsystem {
 
 	public void stop() {
 		tank_power(0, 0);
+		for (PIDController pid_c : pid_control) {
+			pid_c.disable();
+		}
 	}
 	
 	// using raw power
@@ -131,12 +98,9 @@ public class Drive extends Subsystem {
 	// inputs should be between +-DriveMotor.MAX_SPEED
 	public void tank_speed(double L_speed, double R_speed) {
 
-		SmartDashboard.putData("Left PID", pid_control[0]);
-		if (!usePID) {
-			System.out.printf("ERROR: Trying to use speed when PID is not being used!\n");
-			return;
+		for (PIDController pid_c : pid_control) {
+			pid_c.enable();
 		}
-		
 		pid_control[0].setSetpoint(L_speed);
 		pid_control[1].setSetpoint(R_speed);
 	}
