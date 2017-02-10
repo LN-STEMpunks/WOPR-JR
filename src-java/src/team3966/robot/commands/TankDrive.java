@@ -21,9 +21,12 @@ public class TankDrive extends BaseCommand {
 	protected void execute() {
 		//System.out.printf("ERROR: This robot only does mecanum drives\n");
 		//systems.drive.tank_power(cont.getAxis(PS4Buttons.STICK_LEFT_Y_AXIS), cont.getAxis(PS4Buttons.STICK_RIGHT_Y_AXIS));
+
 		//systems.drive.tank_speed(cont.getAxis(PS4Buttons.STICK_LEFT_Y_AXIS)*MotorEncoder.MAX_SPEED, cont.getAxis(PS4Buttons.STICK_RIGHT_Y_AXIS)*MotorEncoder.MAX_SPEED);
 		//systems.drive.tank_speed(1.0, 0);
-		systems.drive.tank_speed(0, 0);
+
+		systems.drive.tank_speed(cont.getAxis(PS4Buttons.STICK_LEFT_Y_AXIS)*MotorEncoder.MAX_SPEED, cont.getAxis(PS4Buttons.STICK_RIGHT_Y_AXIS)*MotorEncoder.MAX_SPEED);
+		//systems.drive.tank_power(0, 0);
 	}
 
 }

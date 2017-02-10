@@ -21,7 +21,6 @@ import team3966.robot.commands.Autonomous;
 import team3966.robot.commands.MecDrive;
 import team3966.robot.commands.StopDrive;
 import team3966.robot.commands.TankDrive;
-import team3966.robot.commands.TankDriveTimed;
 
 /**
  * Our 2017 robot code
