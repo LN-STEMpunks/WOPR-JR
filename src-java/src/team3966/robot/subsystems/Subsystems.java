@@ -29,6 +29,8 @@ public class Subsystems {
 		ports = new UltrasonicSerial();
 		navX = new AHRS(SPI.Port.kMXP);
 		lidar = new Lidar(I2C.Port.kOnboard);
+		
+		lidar.start();
 	}
 	
 	public void dumpInfo () {
