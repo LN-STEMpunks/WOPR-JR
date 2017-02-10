@@ -3,9 +3,11 @@ package team3966.robot.subsystems;
 import com.kauailabs.navx.frc.AHRS;
 
 import team3966.robot.hardware.DistanceSensor;
+import team3966.robot.hardware.Lidar;
 import team3966.robot.values.IDs;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import team3966.robot.hardware.UltrasonicSerial;
+import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.SPI;
 
 public class Subsystems {
@@ -14,6 +16,7 @@ public class Subsystems {
 	public OI OI;
 	public DistanceSensor ultrasonic;
 	public UltrasonicSerial ports;
+	public Lidar lidar;
 	public AHRS navX;
 	
 	private boolean isEnabled = false;
@@ -25,6 +28,7 @@ public class Subsystems {
 		ultrasonic = new DistanceSensor(IDs.ultrasonic_0);
 		ports = new UltrasonicSerial();
 		navX = new AHRS(SPI.Port.kMXP);
+		lidar = new Lidar(I2C.Port.kOnboard);
 	}
 	
 	public void dumpInfo () {
@@ -41,6 +45,7 @@ public class Subsystems {
 			SmartDashboard.putNumber("L Speed", drive.L.getRate());
 			SmartDashboard.putNumber("R Speed", drive.R.getRate());
 			SmartDashboard.putString("Distance: ", ports.PortReadout());
+			SmartDashboard.putNumber("LIDAR Distance: ", lidar.getDistance());
 			double XDist = navX.getDisplacementX() / 0.0254;
 			double YDist = navX.getDisplacementY() / 0.0254;
 			double ZDist = navX.getDisplacementZ() / 0.0254;
