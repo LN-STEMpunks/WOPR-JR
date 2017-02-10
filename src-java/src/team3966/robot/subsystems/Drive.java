@@ -7,6 +7,7 @@ import team3966.robot.pidcontrollers.PIDOutputArray;
 import team3966.robot.pidcontrollers.SpeedPID;
 import team3966.robot.values.IDs;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import team3966.robot.commands.TankDrive;
 import edu.wpi.first.wpilibj.PIDController;
@@ -24,21 +25,26 @@ import edu.wpi.first.wpilibj.RobotDrive;
 
 public class Drive extends Subsystem {
 	
-	private boolean usePID;
-	private PIDController[] pid_control;
 
-	// Constants for https://en.wikipedia.org/wiki/PID_controller
-	public static final double kP = 0.1;
-	public static final double kI = 0.0;
-	public static final double kD = 0.0;
-	
 	public DriveMotor L0, L1, R0, R1;
 	public MotorEncoder L, R;
+
+	public PIDController lPID, rPID;
 	
 	private RobotDrive robotDrive;
 	
+	public static final double kLP = 0.24;
+	public static final double kLI = 0.15;
+	public static final double kLD = 0.2;
+	public static final double kLF = 0.0;
+
+	public static final double kRP = 0.24;
+	public static final double kRI = 0.15;
+	public static final double kRD = 0.2;
+	public static final double kRF = 0.0;
+	
+	
 	public Drive(boolean _usePID) {
-		usePID = _usePID;
 		L = new MotorEncoder(IDs.L_encoder_dio_A, IDs.L_encoder_dio_B);
 		R = new MotorEncoder(IDs.R_encoder_dio_A, IDs.R_encoder_dio_B);
 		
@@ -47,31 +53,22 @@ public class Drive extends Subsystem {
 		R0 = new DriveMotor(IDs.R0_motor);
 		R1 = new DriveMotor(IDs.R1_motor);
 		
-		
 		R.setReverseDirection(true);
+		
+		lPID = new PIDController(kLP, kLI, kLD, kLF, new SpeedPID(1.0, L), new PIDOutputArray(1.0, L0, L1));
+		rPID = new PIDController(kRP, kRI, kRD, kRF, new SpeedPID(1.0, R), new PIDOutputArray(1.0, R0, R1));
+		
+		//LiveWindow.addActuator("lPID", 0, lPID);
 
-		
-		//L0.setInverted(true);
-		
-		robotDrive = new RobotDrive(L0, L1, R0, R1);
-		
-		if (usePID) {
-			pid_control = new PIDController[2];
-			SpeedPID L_source = new SpeedPID(-1.0, L);
-			SpeedPID R_source = new SpeedPID(-1.0, R);
-			PIDOutputArray L_out = new PIDOutputArray(1.0, L0, L1);
-			PIDOutputArray R_out = new PIDOutputArray(-1.0, R0, R1);
-			
-			pid_control[0] = new PIDController(kP, kI, kD, L_source, L_out);
-			pid_control[1] = new PIDController(kP, kI, kD, R_source, R_out);
-			
-			for (PIDController pid_c : pid_control) {
-				pid_c.setAbsoluteTolerance(MotorEncoder.MAX_TOLERANCE);
-				pid_c.setInputRange(-MotorEncoder.MAX_SPEED, MotorEncoder.MAX_SPEED);
-				pid_c.setOutputRange(-MotorEncoder.MAX_SPEED, MotorEncoder.MAX_SPEED);
-			}
-			
-		}
+		lPID.setAbsoluteTolerance(MotorEncoder.MAX_TOLERANCE);
+		rPID.setAbsoluteTolerance(MotorEncoder.MAX_TOLERANCE);
+
+		lPID.setInputRange(-MotorEncoder.MAX_SPEED, MotorEncoder.MAX_SPEED);
+		rPID.setInputRange(-MotorEncoder.MAX_SPEED, MotorEncoder.MAX_SPEED);
+
+		lPID.setOutputRange(-MotorEncoder.MAX_SPEED, MotorEncoder.MAX_SPEED);
+		rPID.setOutputRange(-MotorEncoder.MAX_SPEED, MotorEncoder.MAX_SPEED);
+
 	}
 	
 	public Drive() {
@@ -85,26 +82,30 @@ public class Drive extends Subsystem {
 
 	public void stop() {
 		tank_power(0, 0);
-		for (PIDController pid_c : pid_control) {
-			pid_c.disable();
-		}
 	}
 	
 	// using raw power
 	public void tank_power(double L_power, double R_power) {
-		robotDrive.tankDrive(L_power, R_power);
-	}
-	
-	// inputs should be between +-DriveMotor.MAX_SPEED
-	public void tank_speed(double L_speed, double R_speed) {
+		lPID.disable();
+		rPID.disable();
 
-		for (PIDController pid_c : pid_control) {
-			pid_c.enable();
-		}
-		pid_control[0].setSetpoint(L_speed);
-		pid_control[1].setSetpoint(R_speed);
+		L0.set(L_power);
+		L1.set(L_power);
+		R0.set(R_power);
+		R1.set(R_power);
 	}
-	
+
+	public void tank_speed(double L_s, double R_s) {
+		if (!lPID.isEnabled()) {
+  			lPID.enable();
+			rPID.enable();
+		}
+
+		lPID.setSetpoint(L_s);
+		rPID.setSetpoint(R_s);
+	}
+
+
 	/*
 	public void mecanum_cartesian(double X_speed, double Y_speed, double R_speed) {
 		robotDrive.mecanumDrive_Cartesian(X_speed, Y_speed, R_speed, 0);

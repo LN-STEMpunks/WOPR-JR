@@ -7,7 +7,7 @@ public class MotorEncoder extends Encoder {
 
 	// m/s max speed
 	public static final double MAX_SPEED = 2.5;
-	public static final double MAX_TOLERANCE = 0.2;
+	public static final double MAX_TOLERANCE = 0.4;
 	public static final double DISTANCE_PER_TICK = .000827 / 4.8;
 	
 	// no encoder
