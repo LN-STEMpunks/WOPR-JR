@@ -52,8 +52,6 @@ public class TankDrive extends BaseCommand {
                 
                 LPID.setAbsoluteTolerance(MotorEncoder.MAX_TOLERANCE_SPEED);
                 RPID.setAbsoluteTolerance(MotorEncoder.MAX_TOLERANCE_SPEED);
-		
-		//systems.drive.turnOffPID();
 	}
         
         protected void initialize() {
@@ -64,10 +62,8 @@ public class TankDrive extends BaseCommand {
 	}
 
 	protected void execute() {
-            
             LPID.setSetpoint(MotorEncoder.MAX_SPEED*cont.getAxis(PS4Buttons.STICK_LEFT_Y_AXIS));
             RPID.setSetpoint(MotorEncoder.MAX_SPEED*cont.getAxis(PS4Buttons.STICK_RIGHT_Y_AXIS));
-            
 	}
 
 	protected void interrupted() {
@@ -79,5 +75,4 @@ public class TankDrive extends BaseCommand {
             LPID.disable();
             RPID.disable();
         }
-        
 }

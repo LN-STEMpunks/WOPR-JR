@@ -4,7 +4,6 @@ import edu.wpi.first.wpilibj.PIDController;
 import team3966.robot.Robot;
 import team3966.robot.hardware.MotorEncoder;
 import team3966.robot.subsystems.Subsystems;
-import team3966.robot.values.PS4Buttons;
 import team3966.robot.hardware.Controller;
 import team3966.robot.pidcontrollers.MotorPIDOutput;
 import team3966.robot.pidcontrollers.MotorPIDSource;
@@ -18,14 +17,14 @@ public class TankDriveDistance extends BaseCommand {
         private PIDController LPID, RPID;
         
         // PID constants
-	public static final double kLP = 0.22;
-	public static final double kLI = 0.07;
+	public static final double kLP = 0.32;
+	public static final double kLI = 0.0;
 	public static final double kLD = 0.1;
 	public static final double kLF = 0.0;
 
-	public static final double kRP = 0.24;
-	public static final double kRI = 0.09;
-	public static final double kRD = 0.8;
+	public static final double kRP = 0.32;
+	public static final double kRI = 0.0;
+	public static final double kRD = 0.1;
 	public static final double kRF = 0.0;
         
         private double distance;
@@ -48,9 +47,6 @@ public class TankDriveDistance extends BaseCommand {
                 MotorPIDOutput Lout = new MotorPIDOutput(systems.drive.L0, systems.drive.L1);
                 MotorPIDOutput Rout = new MotorPIDOutput(systems.drive.R0, systems.drive.R1);
                 
-                Lout.setScale(1);
-                Rout.setScale(1);
-
                 LPID = new PIDController(kLP, kLI, kLD, kLF, Lsource, Lout);
                 LPID.setInputRange(-MotorEncoder.MAX_DISTANCE, MotorEncoder.MAX_DISTANCE);
                 LPID.setOutputRange(-1, 1);
@@ -61,8 +57,6 @@ public class TankDriveDistance extends BaseCommand {
                 
                 LPID.setAbsoluteTolerance(MotorEncoder.MAX_TOLERANCE_DISTANCE);
                 RPID.setAbsoluteTolerance(MotorEncoder.MAX_TOLERANCE_DISTANCE);
-		
-		//systems.drive.turnOffPID();
 	}
         
         protected void initialize() {
