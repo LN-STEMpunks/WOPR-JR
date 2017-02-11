@@ -1,0 +1,10 @@
+.project
+.classpath
+
+bin/
+build/
+dist/
+sysProps.xml
+workbench.xmi
+
+nbproject/private/

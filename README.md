@@ -11,10 +11,7 @@ Clone the repository:
 
 `git clone https://github.com/LN-STEMpunks/WOPR-JR.git && cd WOPR-JR`
 
-Now, whether you want to work on python, or java, either run `cd src-py` or `cd src-java`.
-
-Now, to see instructions for that language, view the README.md in that subfolder.
-
+Now, `cd project`
 
 ## Developing
 
@@ -22,23 +19,13 @@ First, follow [Getting Started](#getting-started), then:
 
 We will push straight to master. But, before you do, make sure the code runs.
 
-You can test these with:
-
-`python3 src/robot.py test` or replace `test` with `sim` to simulate
-
-Or, for downtrodden Windows users:
-
-`py src/robot.py deploy`
-
-
-
-`cd src-java && ant deploy`
+`ant compile`
 
 If these run fine, then run:
 
-`git add $FILES` where `$FILES` are the files you want to commit. (most likely `Python/` or `Java/` and `CHANGELOG.md`)
+`git add $FILES` where `$FILES` are the files you want to commit. (most likely `project/` or `CHANGELOG.md`)
 
-`git commit -m"MESSAGE HERE"` replacing MESSAGE HERE with whatever message you want to use.
+`git commit -m "MESSAGE HERE"` replacing MESSAGE HERE with whatever message you want to use.
 
 `git push`
 
