@@ -13,6 +13,10 @@ public class MotorPIDOutput implements PIDOutput {
 	public MotorPIDOutput(DriveMotor... _motors) {
 		motors = _motors;
 	}
+        
+        public void setScale(double _scale) {
+            scale = _scale;
+        }
 
 	public void pidWrite(double speed) {
 		for (PIDOutput motor : motors) {
