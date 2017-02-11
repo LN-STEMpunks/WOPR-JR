@@ -1,0 +1,4 @@
+Manifest-Version: 1.0
+Ant-Version: Apache Ant 1.9.4
+Created-By: LN STEmpunks
+Main-Class: team3966.robot.Robot
