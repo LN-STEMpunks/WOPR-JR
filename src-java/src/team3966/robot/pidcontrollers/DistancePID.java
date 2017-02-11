@@ -6,11 +6,11 @@ import edu.wpi.first.wpilibj.PIDSourceType;
 
 public class DistancePID implements PIDSource {
 	
-	private MotorEncoder[] enc;
+	private MotorEncoder enc;
 	private PIDSourceType sourceType = PIDSourceType.kDisplacement;
 	private double scale;
 	
-	public DistancePID(double sc, MotorEncoder... _e) {
+	public DistancePID(double sc, MotorEncoder _e) {
 		enc = _e;
 		scale = sc;
 	}
@@ -20,11 +20,7 @@ public class DistancePID implements PIDSource {
 	}
 
 	public double pidGet() {
-		double sm = 0;
-		for (int i = 0; i < enc.length; ++i) {
-			sm += enc[i].getDistance();
-		}
-		return (sm / enc.length)*scale;
+		return enc.getDistance()*scale;
 	}
 
 	public void setPIDSourceType(PIDSourceType arg0) {

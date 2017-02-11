@@ -14,7 +14,7 @@ public class Lidar implements PIDSource{
 	
 	private final int LIDAR_ADDR = 0x62;
 	private final int LIDAR_CONFIG_REGISTER = 0x00;
-	private final int LIDAR_DISTANCE_REGISTER = 0x8f;
+	private final int LIDAR_DISTANCE_REGISTER = 0x16;//0x8f;
 	
 	public Lidar(Port port) {
 		i2c = new I2C(port, LIDAR_ADDR);
@@ -24,12 +24,12 @@ public class Lidar implements PIDSource{
 		updater = new java.util.Timer();
 	}
 
-	@Override
+	//@Override
 	public PIDSourceType getPIDSourceType(){
 		return PIDSourceType.kDisplacement;
 	}
 
-	@Override
+	//@Override
 	public void setPIDSourceType(PIDSourceType pidSourceType){
 		
 	}
@@ -62,7 +62,7 @@ public class Lidar implements PIDSource{
 	// Update distance variable
 	public void update() {
 		i2c.write(LIDAR_CONFIG_REGISTER, 0x04); // Initiate measurement
-		Timer.delay(0.04); // Delay for measurement to be taken
+		Timer.delay(0.05); // Delay for measurement to be taken
 		i2c.read(LIDAR_DISTANCE_REGISTER, 2, distance); // Read in measurement
 		Timer.delay(0.005); // Delay to prevent over polling
 	}
