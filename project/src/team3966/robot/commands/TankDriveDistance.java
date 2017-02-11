@@ -18,14 +18,14 @@ public class TankDriveDistance extends BaseCommand {
         private PIDController LPID, RPID;
         
         // PID constants
-	public static final double kLP = 0.24;
-	public static final double kLI = 0.15;
-	public static final double kLD = 0.2;
+	public static final double kLP = 0.22;
+	public static final double kLI = 0.07;
+	public static final double kLD = 0.1;
 	public static final double kLF = 0.0;
 
-	public static final double kRP = 0.29;
-	public static final double kRI = 0.16;
-	public static final double kRD = 0.15;
+	public static final double kRP = 0.24;
+	public static final double kRI = 0.09;
+	public static final double kRD = 0.8;
 	public static final double kRF = 0.0;
         
         private double distance;
@@ -43,8 +43,13 @@ public class TankDriveDistance extends BaseCommand {
                 Lsource.useDistance();
                 Rsource.useDistance();
                 
+                Lsource.setScale(-1);
+                
                 MotorPIDOutput Lout = new MotorPIDOutput(systems.drive.L0, systems.drive.L1);
                 MotorPIDOutput Rout = new MotorPIDOutput(systems.drive.R0, systems.drive.R1);
+                
+                Lout.setScale(1);
+                Rout.setScale(1);
 
                 LPID = new PIDController(kLP, kLI, kLD, kLF, Lsource, Lout);
                 LPID.setInputRange(-MotorEncoder.MAX_DISTANCE, MotorEncoder.MAX_DISTANCE);
@@ -80,9 +85,9 @@ public class TankDriveDistance extends BaseCommand {
         }
         
         protected void end() {
-            systems.drive.stop();
             LPID.disable();
             RPID.disable();
+            systems.drive.stop();
         }
         
 }
