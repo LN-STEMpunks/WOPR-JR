@@ -6,4 +6,6 @@ nbbuild/
 dist/
 nbdist/
 
+.classpath
+
 .nb-gradle/
