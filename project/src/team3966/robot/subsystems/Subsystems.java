@@ -1,10 +1,11 @@
 package team3966.robot.subsystems;
 
+import com.kauailabs.navx.frc.AHRS;
+
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.SPI;
 
-import com.kauailabs.navx.frc.AHRS;
 
 import team3966.robot.hardware.DistanceSensor;
 import team3966.robot.hardware.Lidar;

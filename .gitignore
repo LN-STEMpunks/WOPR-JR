@@ -14,8 +14,6 @@ out/
 tmp/
 .settings/
 .loadpath
-#.project
-#.classpath
 .vscode/
 .idea
 
@@ -38,4 +36,3 @@ Thumbs.db
 *.pyc
 *__pycache__*
 *.pyo
-/NETBEANSPROJECT/nbproject/private/
