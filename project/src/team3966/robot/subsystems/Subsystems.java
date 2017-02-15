@@ -31,7 +31,7 @@ public class Subsystems {
 		ultrasonic = new DistanceSensor(IDs.ultrasonic_0);
 		ports = new UltrasonicSerial();
 		navX = new AHRS(SPI.Port.kMXP);
-		lidar = new Lidar(I2C.Port.kOnboard);
+		lidar = new Lidar(I2C.Port.kMXP);
 		
 		lidar.start();
 	}
@@ -39,6 +39,8 @@ public class Subsystems {
 	public void dumpInfo () {
 		if (isEnabled) {
 			SmartDashboard.putNumber("Distance Sensor", ultrasonic.getDistance());
+			SmartDashboard.putNumber("Distance Sensor (serial)", ports.getDistance());
+			SmartDashboard.putString("Serial Output", ports.PortReadout());
 			SmartDashboard.putNumber("Average Volts", ultrasonic.getAverageVoltage());
 			SmartDashboard.putNumber("Volts", ultrasonic.getVoltage());
 			SmartDashboard.putNumber("L Encoder", drive.Lenc.getRaw());

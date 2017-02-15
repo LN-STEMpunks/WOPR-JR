@@ -1,16 +1,19 @@
 package team3966.robot.hardware;
 
 import edu.wpi.first.wpilibj.AnalogInput;
+import edu.wpi.first.wpilibj.CircularBuffer;
 
 public class DistanceSensor extends AnalogInput {
 
 	// millivolts per meter
-	private double MV_PER_M = 100 * 4.9;
+	private double V_PER_M = 4.88 / 5;
+        
+        private CircularBuffer cb = new CircularBuffer(10);
 	
 	public DistanceSensor(int id) {
 		super(id);
-		setOversampleBits(4);
-		setAverageBits(2);
+		setOversampleBits(5);
+		setAverageBits(4);
 		setGlobalSampleRate(62500);
 		//SmartDashboard.putNumber("Distance Sensor", DistanceSensor.getDistance());
 	}
@@ -18,8 +21,29 @@ public class DistanceSensor extends AnalogInput {
 	// returns distance in meters
 	// Is finicky, try debugging it
 	public double getDistance() {
-		double millivolts = getAverageVoltage() * 1000.0;
-		return millivolts / MV_PER_M;
+                double met = getAverageVoltage() * V_PER_M;
+                cb.pushFront(met);
+		return met;
+	}
+        public double getDistanceAverage() {
+		getDistance();
+                int minidx = 0, maxidx = 0;
+                for (int i = 0; i < 10; ++i) {
+                    if (cb.get(i) < cb.get(minidx)) {
+                        minidx = i;
+                    }
+                    if (cb.get(i) > cb.get(maxidx)) {
+                        maxidx = i;
+                    }
+                }
+                double avg = 0;
+                for (int i = 0; i < 10; ++i) {
+                    if (i != minidx && i != maxidx) {
+                        avg += cb.get(i);
+                    }
+                }
+                avg = avg / 8;
+                return avg;
 	}
 }
 

@@ -6,6 +6,7 @@ import edu.wpi.first.wpilibj.SerialPort.Port;
 public class UltrasonicSerial {
 	SerialPort serial = null;
 	String distanceString = "No data";
+        double lastGoodValue = 0;
 
 	public String PortReadout() {
 		try {
@@ -23,8 +24,35 @@ public class UltrasonicSerial {
 			} 
 			return this.distanceString;
 		} catch (Exception e) {
-			return "Got an error";
+			return "0";
 		}
 	}
+        
+        public double getDistance() {
+            String read = PortReadout().replace("R", "");
+            if (read == "No data") {
+                return 0;
+            }
+            boolean hasNonZero = false;
+            String fread = "";
+            for (int i = 0; i < read.length(); ++i) {
+                if (read.toCharArray()[i] != '0') {
+                    hasNonZero = true;
+                }
+                if (!hasNonZero) {
+                    fread = read.substring(i+1, read.length()-1);
+                }
+            }
+            double ret = 0;
+            try {
+                ret = Integer.parseInt(fread) / 1000.0;
+            } catch (Exception e) {
+                ret = lastGoodValue;
+            }
+            if (ret <= 0) {
+                ret = lastGoodValue;
+            }
+            return ret;
+        }
 
 }
