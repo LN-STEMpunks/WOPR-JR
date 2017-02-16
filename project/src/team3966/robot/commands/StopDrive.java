@@ -7,16 +7,17 @@ import team3966.robot.Robot;
  */
 public class StopDrive extends BaseCommand {
 
-	public StopDrive() {
-		super(Robot.subsystems.drive);
-	}
+    public StopDrive() {
+        super(Robot.subsystems.drive);
+    }
 
-	protected void execute() {
-		Robot.subsystems.drive.stop();
-	}
-	@Override
-	protected boolean isFinished() {
-		return true;
-	}
+    protected void execute() {
+        Robot.subsystems.drive.stop();
+    }
+
+    @Override
+    protected boolean isFinished() {
+        return true;
+    }
 
 }

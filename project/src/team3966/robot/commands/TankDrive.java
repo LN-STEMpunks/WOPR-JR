@@ -9,70 +9,68 @@ import team3966.robot.hardware.Controller;
 import team3966.robot.pidcontrollers.MotorPIDOutput;
 import team3966.robot.pidcontrollers.MotorPIDSource;
 
-
 public class TankDrive extends BaseCommand {
-	
-	private Controller cont;
-	private Subsystems systems;
-        
-        private PIDController LPID, RPID;
-        
-        // PID constants
-	public static final double kLP = 0.24;
-	public static final double kLI = 0.15;
-	public static final double kLD = 0.2;
-	public static final double kLF = 0.0;
 
-	public static final double kRP = 0.29;
-	public static final double kRI = 0.16;
-	public static final double kRD = 0.15;
-	public static final double kRF = 0.0;
-	
+    private Controller cont;
+    private Subsystems systems;
 
-	public TankDrive() {
-		super(Robot.subsystems.drive);
-		systems = Robot.subsystems;
-		cont = systems.OI.controller;
+    private PIDController LPID, RPID;
 
-                MotorPIDSource Lsource = new MotorPIDSource(systems.drive.Lenc);
-                MotorPIDSource Rsource = new MotorPIDSource(systems.drive.Renc);
-                Lsource.useSpeed();
-                Rsource.useSpeed();
-                
-                MotorPIDOutput Lout = new MotorPIDOutput(systems.drive.L0, systems.drive.L1);
-                MotorPIDOutput Rout = new MotorPIDOutput(systems.drive.R0, systems.drive.R1);
+    // PID constants
+    public static final double kLP = 0.24;
+    public static final double kLI = 0.15;
+    public static final double kLD = 0.2;
+    public static final double kLF = 0.0;
 
-                LPID = new PIDController(kLP, kLI, kLD, kLF, Lsource, Lout);
-                LPID.setInputRange(-MotorEncoder.MAX_SPEED, MotorEncoder.MAX_SPEED);
-                LPID.setOutputRange(-1, 1);
+    public static final double kRP = 0.29;
+    public static final double kRI = 0.16;
+    public static final double kRD = 0.15;
+    public static final double kRF = 0.0;
 
-                RPID = new PIDController(kRP, kRI, kRD, kRF, Rsource, Rout);
-                RPID.setInputRange(-MotorEncoder.MAX_SPEED, MotorEncoder.MAX_SPEED);
-                RPID.setOutputRange(-1, 1);
-                
-                LPID.setAbsoluteTolerance(MotorEncoder.MAX_TOLERANCE_SPEED);
-                RPID.setAbsoluteTolerance(MotorEncoder.MAX_TOLERANCE_SPEED);
-	}
-        
-        protected void initialize() {
-            LPID.enable();
-            RPID.enable();
-            LPID.setSetpoint(0.0);
-            RPID.setSetpoint(0.0);
-	}
+    public TankDrive() {
+        super(Robot.subsystems.drive);
+        systems = Robot.subsystems;
+        cont = systems.OI.controller;
 
-	protected void execute() {
-            LPID.setSetpoint(MotorEncoder.MAX_SPEED*cont.getAxis(PS4Buttons.STICK_LEFT_Y_AXIS));
-            RPID.setSetpoint(MotorEncoder.MAX_SPEED*cont.getAxis(PS4Buttons.STICK_RIGHT_Y_AXIS));
-	}
+        MotorPIDSource Lsource = new MotorPIDSource(systems.drive.Lenc);
+        MotorPIDSource Rsource = new MotorPIDSource(systems.drive.Renc);
+        Lsource.useSpeed();
+        Rsource.useSpeed();
 
-	protected void interrupted() {
-            end();
-        }
-        
-        protected void end() {
-            systems.drive.stop();
-            LPID.disable();
-            RPID.disable();
-        }
+        MotorPIDOutput Lout = new MotorPIDOutput(systems.drive.L0, systems.drive.L1);
+        MotorPIDOutput Rout = new MotorPIDOutput(systems.drive.R0, systems.drive.R1);
+
+        LPID = new PIDController(kLP, kLI, kLD, kLF, Lsource, Lout);
+        LPID.setInputRange(-MotorEncoder.MAX_SPEED, MotorEncoder.MAX_SPEED);
+        LPID.setOutputRange(-1, 1);
+
+        RPID = new PIDController(kRP, kRI, kRD, kRF, Rsource, Rout);
+        RPID.setInputRange(-MotorEncoder.MAX_SPEED, MotorEncoder.MAX_SPEED);
+        RPID.setOutputRange(-1, 1);
+
+        LPID.setAbsoluteTolerance(MotorEncoder.MAX_TOLERANCE_SPEED);
+        RPID.setAbsoluteTolerance(MotorEncoder.MAX_TOLERANCE_SPEED);
+    }
+
+    protected void initialize() {
+        LPID.enable();
+        RPID.enable();
+        LPID.setSetpoint(0.0);
+        RPID.setSetpoint(0.0);
+    }
+
+    protected void execute() {
+        LPID.setSetpoint(MotorEncoder.MAX_SPEED * cont.getAxis(PS4Buttons.STICK_LEFT_Y_AXIS));
+        RPID.setSetpoint(MotorEncoder.MAX_SPEED * cont.getAxis(PS4Buttons.STICK_RIGHT_Y_AXIS));
+    }
+
+    protected void interrupted() {
+        end();
+    }
+
+    protected void end() {
+        systems.drive.stop();
+        LPID.disable();
+        RPID.disable();
+    }
 }

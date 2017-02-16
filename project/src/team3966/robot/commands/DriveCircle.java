@@ -7,11 +7,16 @@ import team3966.robot.subsystems.Subsystems;
 import team3966.robot.hardware.Controller;
 import team3966.robot.pidcontrollers.MotorPIDOutput;
 import team3966.robot.pidcontrollers.MotorPIDSource;
+import team3966.robot.values.Measures;
 
-public class TankDriveDistance extends BaseCommand {
+public class DriveCircle extends BaseCommand {
 
     private Controller cont;
     private Subsystems systems;
+
+    private double start;
+    private long starttime;
+    private double elapsed;
 
     private PIDController LPID, RPID;
 
@@ -26,15 +31,14 @@ public class TankDriveDistance extends BaseCommand {
     public static final double kRD = 0.1;
     public static final double kRF = 0.0;
 
-    private double Ldistance, Rdistance;
+    private double radius;
 
-    public TankDriveDistance(double _Ldistance, double _Rdistance) {
+    public DriveCircle(double _radius) {
         super(Robot.subsystems.drive);
         systems = Robot.subsystems;
         cont = systems.OI.controller;
 
-        Ldistance = _Ldistance;
-        Rdistance = _Rdistance;
+        radius = _radius;
 
         MotorPIDSource Lsource = new MotorPIDSource(systems.drive.Lenc);
         MotorPIDSource Rsource = new MotorPIDSource(systems.drive.Renc);
@@ -61,8 +65,10 @@ public class TankDriveDistance extends BaseCommand {
     protected void initialize() {
         LPID.enable();
         RPID.enable();
-        LPID.setSetpoint(systems.drive.Lenc.getDistance() - Ldistance);
-        RPID.setSetpoint(systems.drive.Renc.getDistance() - Rdistance);
+        starttime = System.nanoTime();
+        start = systems.drive.Lenc.getDistance();
+        LPID.setSetpoint(start);
+        RPID.setSetpoint(start);
     }
 
     protected boolean isFinished() {
@@ -70,7 +76,9 @@ public class TankDriveDistance extends BaseCommand {
     }
 
     protected void execute() {
-        // it has setpoint
+        elapsed = (System.nanoTime() - starttime) * Math.pow(10, -9);
+        LPID.setSetpoint(start - (radius + Measures.WHEEL_DISTANCE / 2) * elapsed);
+        RPID.setSetpoint(start - (radius - Measures.WHEEL_DISTANCE / 2) * elapsed);
     }
 
     protected void interrupted() {
