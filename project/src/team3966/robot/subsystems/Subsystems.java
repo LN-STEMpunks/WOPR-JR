@@ -53,6 +53,7 @@ public class Subsystems {
 			SmartDashboard.putNumber("R Speed", drive.Renc.getRate());
 			SmartDashboard.putString("Distance: ", ports.PortReadout());
 			SmartDashboard.putNumber("LIDAR Distance: ", lidar.getDistance());
+			SmartDashboard.putNumber("Yaw: ", navX.getYaw());
 			
 			// now in meters
 			String disps = "(" + navX.getDisplacementX() + ", " + navX.getDisplacementY() + ", " + navX.getDisplacementZ() + ")";

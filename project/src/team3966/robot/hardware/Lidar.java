@@ -103,18 +103,15 @@ public class Lidar implements PIDSource, LiveWindowSendable {
 		}
 	}
 
-	@Override
 	public String getSmartDashboardType() {
 		return "LIDAR";
 	}
 
-	@Override
 	public void initTable(ITable subtable) {
 		m_table = subtable;
 		updateTable();
 	}
 
-	@Override
 	public void updateTable() {
 		if (m_table != null) {
 			m_table.putNumber("LIDAR updateCount", this.updateCount);
@@ -125,16 +122,13 @@ public class Lidar implements PIDSource, LiveWindowSendable {
 		}
 	}
 
-	@Override
 	public ITable getTable() {
 		return m_table;
 	}
 
-	@Override
 	public void startLiveWindowMode() {
 	}
 
-	@Override
 	public void stopLiveWindowMode() {
 	}
 }
