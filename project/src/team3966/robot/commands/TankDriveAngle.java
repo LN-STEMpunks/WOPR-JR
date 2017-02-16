@@ -53,7 +53,7 @@ public class TankDriveAngle extends BaseCommand {
         PID.setContinuous(true);
         PID.setOutputRange(-.25, .25);
 
-        PID.setAbsoluteTolerance(.5);
+        PID.setAbsoluteTolerance(4);
 	}
         
         protected void initialize() {
