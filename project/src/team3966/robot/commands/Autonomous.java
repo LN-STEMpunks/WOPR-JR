@@ -12,7 +12,7 @@ public class Autonomous extends CommandGroup {
 		//addSequential(new TankDriveTimed(2.5, 2.5, 5.0));
 		//addSequential(new TankDriveTimed(1.5, 4.0));
 		//addSequential(new TankDriveDistance(3));
-		addSequential(new TankDriveAngle(30));
+		addSequential(new TankDriveAngle(90));
 	}
 	
 }
