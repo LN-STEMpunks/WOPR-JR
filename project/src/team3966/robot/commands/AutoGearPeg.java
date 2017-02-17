@@ -15,9 +15,9 @@ public class AutoGearPeg extends CommandGroup {
 
     public AutoGearPeg() {
         double vexbot = 2.90322 - 2.284095;
-        addSequential(new TankDriveDistance(0.5, 0.5));
+        //addSequential(new TankDriveDistance(0.5, 0.5));
         //addSequential(new TankDriveDistance(-vexbot, -vexbot));
-        addSequential(new TankDriveAngle(-60));
+        //addSequential(new TankDriveAngle(-60));
 
         addSequential(new AlignToGearPeg());
     }

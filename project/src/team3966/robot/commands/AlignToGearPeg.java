@@ -2,6 +2,9 @@ package team3966.robot.commands;
 
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.networktables.NetworkTable;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import team3966.robot.Robot;
 import team3966.robot.hardware.MotorEncoder;
 import team3966.robot.subsystems.Subsystems;
@@ -21,15 +24,9 @@ public class AlignToGearPeg extends BaseCommand {
     private PIDController PID;
 
     // PID constants
-    public static final double kLP = 0.24;
-    public static final double kLI = 0.15;
-    public static final double kLD = 0.2;
-    public static final double kLF = 0.0;
-
-    public static final double kRP = 0.29;
-    public static final double kRI = 0.16;
-    public static final double kRD = 0.15;
-    public static final double kRF = 0.0;
+    public static final double kP = 0.003;
+    public static final double kI = 0.0;
+    public static final double kD = 0.0;
 
 
     public AlignToGearPeg() {
@@ -38,7 +35,7 @@ public class AlignToGearPeg extends BaseCommand {
         cont = systems.OI.controller;
 
 
-        NetworkTablePIDSource source = new NetworkTablePIDSource("/vision/gearpeg/", "x");
+        NetworkTablePIDSource source = new NetworkTablePIDSource("vision/gearpeg", "x");
 
         MotorTurnPIDOutput out = new MotorTurnPIDOutput(
                 new DriveMotor[]{
@@ -49,18 +46,18 @@ public class AlignToGearPeg extends BaseCommand {
                 }
         );
 
-        PID = new PIDController(kRP, kRI, kRD, kRF, source, out);
-        PID.setInputRange(0, NetworkTable.getTable("/vision/gearpeg/").getNumber("camwidth", 320));
-        PID.setOutputRange(-1, 1);
+        PID = new PIDController(kP, kI, kD, source, out);
+        PID.setInputRange(-1, NetworkTable.getTable("vision/gearpeg").getNumber("camwidth", 320));
+        PID.setOutputRange(-.15, .15);
 
-        PID.setAbsoluteTolerance(5);
+        PID.setAbsoluteTolerance(20);
 
         //systems.drive.turnOffPID();
     }
 
     protected void initialize() {
         PID.enable();
-        double width = (NetworkTable.getTable("/vision/gearpeg/").getNumber("camwidth", 320));
+        double width = (NetworkTable.getTable("vision/gearpeg").getNumber("camwidth", 320));
         PID.setInputRange(0, width);
         PID.setSetpoint(width / 2.0);
     }
@@ -70,9 +67,12 @@ public class AlignToGearPeg extends BaseCommand {
     }
 
     protected void execute() {
-        double width = (NetworkTable.getTable("/vision/gearpeg/").getNumber("camwidth", 320));
+        double width = (NetworkTable.getTable("vision/gearpeg").getNumber("camwidth", 320));
         PID.setInputRange(0, width);
         PID.setSetpoint(width / 2.0);
+        if (PID.onTarget()) {
+            end();
+        }
     }
 
     protected void interrupted() {
@@ -80,8 +80,8 @@ public class AlignToGearPeg extends BaseCommand {
     }
 
     protected void end() {
-        systems.drive.stop();
         PID.disable();
+        systems.drive.stop();
     }
 
 }
