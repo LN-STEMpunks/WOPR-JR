@@ -11,6 +11,8 @@ public class NetworkTablePIDSource implements PIDSource {
     private String ntVar;
 
     private NetworkTable nt;
+    
+    public double lastVal = 0;
 
     // by default, do distance
     private PIDSourceType sourceType = PIDSourceType.kDisplacement;
@@ -23,6 +25,7 @@ public class NetworkTablePIDSource implements PIDSource {
 
     public double pidGet() {
         double ret = nt.getNumber(ntVar, 0);
+        lastVal = ret;
         //SmartDashboard.putNumber("PID Get NT", ret);
         return ret;
     }

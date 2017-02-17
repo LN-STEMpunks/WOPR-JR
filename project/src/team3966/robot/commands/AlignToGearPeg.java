@@ -23,19 +23,25 @@ public class AlignToGearPeg extends BaseCommand {
 
     private PIDController PID;
 
+    private NetworkTablePIDSource source;
+
+    private double[] vals = new double[20];
+    private int valsIdx = 0;
+
     // PID constants
     public static final double kP = 0.003;
     public static final double kI = 0.0;
     public static final double kD = 0.0;
 
+    public static final double CAMERA_WIDTH = 320;
+    public static final double MIDDLE_OF_CAMERA = 160;
 
     public AlignToGearPeg() {
         super(Robot.subsystems.drive);
         systems = Robot.subsystems;
         cont = systems.OI.controller;
 
-
-        NetworkTablePIDSource source = new NetworkTablePIDSource("vision/gearpeg", "x");
+        source = new NetworkTablePIDSource("vision/gearpeg", "x");
 
         MotorTurnPIDOutput out = new MotorTurnPIDOutput(
                 new DriveMotor[]{
@@ -47,7 +53,8 @@ public class AlignToGearPeg extends BaseCommand {
         );
 
         PID = new PIDController(kP, kI, kD, source, out);
-        PID.setInputRange(-1, NetworkTable.getTable("vision/gearpeg").getNumber("camwidth", 320));
+        //PID.setInputRange(-1, NetworkTable.getTable("vision/gearpeg").getNumber("camwidth", 320));
+        PID.setInputRange(-1, CAMERA_WIDTH);
         PID.setOutputRange(-.15, .15);
 
         PID.setAbsoluteTolerance(20);
@@ -57,19 +64,32 @@ public class AlignToGearPeg extends BaseCommand {
 
     protected void initialize() {
         PID.enable();
-        double width = (NetworkTable.getTable("vision/gearpeg").getNumber("camwidth", 320));
-        PID.setInputRange(0, width);
-        PID.setSetpoint(width / 2.0);
+        PID.setSetpoint(MIDDLE_OF_CAMERA);
+        //double width = (NetworkTable.getTable("vision/gearpeg").getNumber("camwidth", 320));
+        //PID.setInputRange(0, width);
+        //PID.setSetpoint(width / 2.0);
     }
 
     protected boolean isFinished() {
         return PID.onTarget();
     }
 
+    // if it has wiggled accross too much.
+    // We need this method because of latency, the PID loop doesn't work with NT values :(
+    private boolean hasWiggled() {
+        int changes = 0;
+        for (int i = 1; i < vals.length; ++i) {
+            if (Math.signum(vals[i] - PID.getSetpoint()) != Math.signum(vals[i - 1] - PID.getSetpoint())) {
+                changes++;
+            }
+        }
+        return changes >= 2;
+    }
+
     protected void execute() {
-        double width = (NetworkTable.getTable("vision/gearpeg").getNumber("camwidth", 320));
-        PID.setInputRange(0, width);
-        PID.setSetpoint(width / 2.0);
+        vals[valsIdx] = source.lastVal;
+        valsIdx = (valsIdx + 1) % 20;
+        //PID.setSetpoint();
         if (PID.onTarget()) {
             end();
         }
