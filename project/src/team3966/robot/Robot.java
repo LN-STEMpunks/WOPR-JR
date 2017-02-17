@@ -28,6 +28,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import team3966.robot.commands.AutoGearPeg;
 
 import team3966.robot.subsystems.Subsystems;
 
@@ -64,11 +65,13 @@ public class Robot extends IterativeRobot {
         
         autoChooser = new SendableChooser();
         autoChooser.addDefault("Default", new Autonomous());
-        autoChooser.addDefault("Circle (1m)", new DriveCircle(1));
-        autoChooser.addDefault("Circle (2m)", new DriveCircle(2));
-        autoChooser.addDefault("Drive forward (1m)", new TankDriveDistance(2, 2));
-        autoChooser.addDefault("Turn (90 d)", new TankDriveAngle(90));
-        
+        autoChooser.addObject("Circle (1m)", new DriveCircle(1));
+        autoChooser.addObject("Circle (2m)", new DriveCircle(2));
+        autoChooser.addObject("Drive forward (1m)", new TankDriveDistance(2, 2));
+        autoChooser.addObject("Turn (90 d)", new TankDriveAngle(90));
+        autoChooser.addObject("Gear Peg (Tyler)", new AutoGearPeg());
+        autoChooser.addObject("Test Points", new DrivePoints(new double[][] {{0, .35}, {-.7, 0}, {.7, .7}}, false));
+
         SmartDashboard.putData("Auto Program", autoChooser);
         
     }

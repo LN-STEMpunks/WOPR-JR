@@ -31,14 +31,12 @@ public class AlignToGearPeg extends BaseCommand {
     public static final double kRD = 0.15;
     public static final double kRF = 0.0;
 
-    private double distance;
 
-    public AlignToGearPeg(double _distance) {
+    public AlignToGearPeg() {
         super(Robot.subsystems.drive);
         systems = Robot.subsystems;
         cont = systems.OI.controller;
 
-        distance = _distance;
 
         NetworkTablePIDSource source = new NetworkTablePIDSource("/vision/gearpeg/", "x");
 
