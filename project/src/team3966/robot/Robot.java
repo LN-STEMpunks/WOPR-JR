@@ -61,12 +61,14 @@ public class Robot extends IterativeRobot {
 
         // stay still during autonomous
         autonomousCommand = new Autonomous();
+        
         autoChooser = new SendableChooser();
         autoChooser.addDefault("Default", new Autonomous());
         autoChooser.addDefault("Circle (1m)", new DriveCircle(1));
         autoChooser.addDefault("Circle (2m)", new DriveCircle(2));
         autoChooser.addDefault("Drive forward (1m)", new TankDriveDistance(2, 2));
         autoChooser.addDefault("Turn (90 d)", new TankDriveAngle(90));
+        
         SmartDashboard.putData("Auto Program", autoChooser);
         
     }
