@@ -5,6 +5,7 @@ import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.SPI;
+import java.util.Arrays;
 import team3966.robot.commands.GearPneumaticsController;
 
 
@@ -63,7 +64,7 @@ public class Subsystems {
 			SmartDashboard.putNumber("Yaw: ", navX.getYaw());
 			SmartDashboard.getBoolean("Left Solenoid Status: ", gpc.LeftStatus());
                         SmartDashboard.getBoolean("Right Solenoid Status: ", gpc.RightStatus());
-                        SmartDashboard.putDouble("PDP Voltage (0 to 15): ", pdp.channelvoltage());
+                        SmartDashboard.putString("PDP Voltage (0 to 15): ", Arrays.toString(pdp.channelvoltage()));
 			// now in meters
 			String disps = "(" + navX.getDisplacementX() + ", " + navX.getDisplacementY() + ", " + navX.getDisplacementZ() + ")";
 			SmartDashboard.putString("NavX Displacements: ", disps);
