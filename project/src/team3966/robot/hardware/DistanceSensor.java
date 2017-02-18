@@ -25,6 +25,16 @@ public class DistanceSensor extends AnalogInput {
                 cb.pushFront(met);
 		return met;
 	}
+        public double getVoltages() {
+                double met = getVoltage();
+                cb.pushFront(met);
+		return met;
+	}
+	public double getAverageVolts() {
+                double met = getAverageVoltage();
+                cb.pushFront(met);
+		return met;
+	}
         public double getDistanceAverage() {
 		getDistance();
                 int minidx = 0, maxidx = 0;

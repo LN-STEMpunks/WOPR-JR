@@ -38,9 +38,11 @@ public class Subsystems {
 	
 	public void dumpInfo () {
 		if (isEnabled) {
-			SmartDashboard.putNumber("Distance Sensor", ultrasonic.getDistance());
+			SmartDashboard.putNumber("Voltage: ", ultrasonic.getVoltages());
+                        SmartDashboard.putNumber("Average Voltage: ", ultrasonic.getAverageVolts());
+                        SmartDashboard.putNumber("Average Distance: ", ultrasonic.getDistanceAverage());
 			SmartDashboard.putNumber("Distance Sensor (serial)", ports.getDistance());
-			SmartDashboard.putString("Serial Output", ports.PortReadout());
+			SmartDashboard.putString("Serial Output: ", ports.PortReadout());
 			SmartDashboard.putNumber("Average Volts", ultrasonic.getAverageVoltage());
 			SmartDashboard.putNumber("Volts", ultrasonic.getVoltage());
 			SmartDashboard.putNumber("L Encoder", drive.Lenc.getRaw());
