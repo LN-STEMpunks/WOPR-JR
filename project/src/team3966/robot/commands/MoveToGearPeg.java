@@ -13,10 +13,11 @@ import team3966.robot.hardware.Controller;
 import team3966.robot.hardware.DriveMotor;
 import team3966.robot.pidcontrollers.MotorPIDOutput;
 import team3966.robot.pidcontrollers.MotorPIDSource;
+import team3966.robot.pidcontrollers.MotorTurnAndMovePIDOutput;
 import team3966.robot.pidcontrollers.MotorTurnPIDOutput;
 import team3966.robot.pidcontrollers.NetworkTablePIDSource;
 
-public class AlignToGearPeg extends BaseCommand {
+public class MoveToGearPeg extends BaseCommand {
 
     private Controller cont;
     private Subsystems systems;
@@ -29,37 +30,37 @@ public class AlignToGearPeg extends BaseCommand {
     private int valsIdx = 0;
 
     // PID constants
-    public static final double kP = 0.003;
+    public static final double kP = 0.0016;
     public static final double kI = 0.0;
     public static final double kD = 0.0;
 
     public static final double CAMERA_WIDTH = 320;
     public static final double MIDDLE_OF_CAMERA = 160;
 
-    public AlignToGearPeg() {
+    public MoveToGearPeg() {
         super(Robot.subsystems.drive);
         systems = Robot.subsystems;
         cont = systems.OI.controller;
 
         source = new NetworkTablePIDSource("vision/gearpeg", "x");
 
-        MotorTurnPIDOutput out = new MotorTurnPIDOutput(
+        MotorTurnAndMovePIDOutput out = new MotorTurnAndMovePIDOutput(
                 new DriveMotor[]{
                     systems.drive.L0, systems.drive.L1
                 },
                 new DriveMotor[]{
                     systems.drive.R0, systems.drive.R1
-                }
+                }, -.25, -.25
         );
-
+        
         PID = new PIDController(kP, kI, kD, source, out);
         PID.setToleranceBuffer(8);
         
         //PID.setInputRange(-1, NetworkTable.getTable("vision/gearpeg").getNumber("camwidth", 320));
         PID.setInputRange(-1, CAMERA_WIDTH);
-        PID.setOutputRange(-.15, .15);
+        PID.setOutputRange(-.03, .03);
 
-        PID.setAbsoluteTolerance(2);
+        PID.setAbsoluteTolerance(3);
 
         //systems.drive.turnOffPID();
     }
@@ -73,8 +74,8 @@ public class AlignToGearPeg extends BaseCommand {
     }
 
     protected boolean isFinished() {
-    	//return false;
-        return PID.onTarget();
+    	return false;
+        //return PID.get() < 0;
     }
 
     // if it has wiggled accross too much.

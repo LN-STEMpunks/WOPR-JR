@@ -29,6 +29,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import team3966.robot.commands.AutoGearPeg;
+import team3966.robot.commands.AutoLeftPosition;
 
 import team3966.robot.subsystems.Subsystems;
 
@@ -38,6 +39,7 @@ import team3966.robot.commands.DrivePoints;
 import team3966.robot.commands.TankDrive;
 import team3966.robot.commands.TankDriveAngle;
 import team3966.robot.commands.TankDriveDistance;
+import team3966.robot.commands.AutoLeftPosition;
 
 /**
  * Our 2017 robot code
@@ -71,7 +73,7 @@ public class Robot extends IterativeRobot {
         autoChooser.addObject("Turn (90 d)", new TankDriveAngle(90));
         autoChooser.addObject("Gear Peg (Tyler)", new AutoGearPeg());
         autoChooser.addObject("Test Points", new DrivePoints(new double[][] {{0, .35}, {-.7, 0}, {.7, .7}}, false));
-
+        autoChooser.addObject("Left Auto", new AutoLeftPosition());
         SmartDashboard.putData("Auto Program", autoChooser);
         
     }
