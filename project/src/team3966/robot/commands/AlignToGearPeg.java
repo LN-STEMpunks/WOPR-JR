@@ -53,11 +53,13 @@ public class AlignToGearPeg extends BaseCommand {
         );
 
         PID = new PIDController(kP, kI, kD, source, out);
+        PID.setToleranceBuffer(5);
+        
         //PID.setInputRange(-1, NetworkTable.getTable("vision/gearpeg").getNumber("camwidth", 320));
         PID.setInputRange(-1, CAMERA_WIDTH);
         PID.setOutputRange(-.15, .15);
 
-        PID.setAbsoluteTolerance(20);
+        PID.setAbsoluteTolerance(2);
 
         //systems.drive.turnOffPID();
     }
@@ -71,7 +73,8 @@ public class AlignToGearPeg extends BaseCommand {
     }
 
     protected boolean isFinished() {
-        return PID.onTarget();
+    	return false;
+        //return PID.onTarget();
     }
 
     // if it has wiggled accross too much.
@@ -90,9 +93,9 @@ public class AlignToGearPeg extends BaseCommand {
         vals[valsIdx] = source.lastVal;
         valsIdx = (valsIdx + 1) % 20;
         //PID.setSetpoint();
-        if (PID.onTarget()) {
+        /*if (PID.onTarget()) {
             end();
-        }
+        }*/
     }
 
     protected void interrupted() {
