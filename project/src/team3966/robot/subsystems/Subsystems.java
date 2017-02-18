@@ -46,7 +46,7 @@ public class Subsystems {
 			SmartDashboard.getBoolean("Left Solenoid Status: ", gpc.LeftStatus());
                         SmartDashboard.getBoolean("Right Solenoid Status: ", gpc.RightStatus());
              */
-            SmartDashboard.putString("PDP Voltage (0 to 15): ", Arrays.toString(sensors.pdp.channelvoltage()));
+            SmartDashboard.putString("PDP Voltage (0 to 15): ", Arrays.toString(sensors.pdp.channelVoltage()));
             // now in meters
             /*
                         if (sensors.gpc.LeftBlacklisted() == true) {

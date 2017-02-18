@@ -28,7 +28,6 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import team3966.robot.commands.AutonomousLeft;
 
 import team3966.robot.subsystems.Subsystems;
 
@@ -105,6 +104,7 @@ public class Robot extends IterativeRobot {
 	 
      */
     public void autonomousPeriodic() {
+        subsystems.sensors.pdp.startLogging();
         Scheduler.getInstance().run();
         subsystems.dumpInfo();
     }
