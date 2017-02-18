@@ -10,6 +10,7 @@ import team3966.robot.commands.GearPneumaticsController;
 
 import team3966.robot.hardware.DistanceSensor;
 import team3966.robot.hardware.Lidar;
+import team3966.robot.hardware.PDPManager;
 import team3966.robot.hardware.UltrasonicSerial;
 
 import team3966.robot.values.IDs;
@@ -18,7 +19,7 @@ public class Subsystems {
 
 	public Drive drive;
 	public OI OI;
-        
+        public PDPManager pdp;
 	public DistanceSensor ultrasonic;
 	public UltrasonicSerial ports;
 	public Lidar lidar;
@@ -36,6 +37,7 @@ public class Subsystems {
 		navX = new AHRS(SPI.Port.kMXP);
 		lidar = new Lidar(I2C.Port.kMXP);
 		gpc = new GearPneumaticsController();
+                pdp = new PDPManager();
 		lidar.start();
 	}
 	
@@ -61,6 +63,7 @@ public class Subsystems {
 			SmartDashboard.putNumber("Yaw: ", navX.getYaw());
 			SmartDashboard.getBoolean("Left Solenoid Status: ", gpc.LeftStatus());
                         SmartDashboard.getBoolean("Right Solenoid Status: ", gpc.RightStatus());
+                        SmartDashboard.putDouble("PDP Voltage (0 to 15): ", pdp.channelvoltage());
 			// now in meters
 			String disps = "(" + navX.getDisplacementX() + ", " + navX.getDisplacementY() + ", " + navX.getDisplacementZ() + ")";
 			SmartDashboard.putString("NavX Displacements: ", disps);
