@@ -18,7 +18,6 @@ import team3966.robot.pidcontrollers.NetworkTablePIDSource;
 
 public class AlignToGearPeg extends BaseCommand {
 
-    private Controller cont;
     private Subsystems systems;
 
     private PIDController PID;
@@ -39,7 +38,6 @@ public class AlignToGearPeg extends BaseCommand {
     public AlignToGearPeg() {
         super(Robot.subsystems.drive);
         systems = Robot.subsystems;
-        cont = systems.OI.controller;
 
         source = new NetworkTablePIDSource("vision/gearpeg", "x");
 

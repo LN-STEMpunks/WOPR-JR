@@ -15,7 +15,6 @@ public class StopDrive extends BaseCommand {
         Robot.subsystems.drive.stop();
     }
 
-    @Override
     protected boolean isFinished() {
         return true;
     }

@@ -6,7 +6,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.SPI;
 
-
 import team3966.robot.hardware.DistanceSensor;
 import team3966.robot.hardware.Lidar;
 import team3966.robot.hardware.UltrasonicSerial;
@@ -17,50 +16,41 @@ public class Subsystems {
 
 	public Drive drive;
 	public OI OI;
-        
-	public DistanceSensor ultrasonic;
-	public UltrasonicSerial ports;
-	public Lidar lidar;
-	public AHRS navX;
-	
+	public Sensors sensors;
+
 	private boolean isEnabled = false;
-	
+
 	public Subsystems() {
 		isEnabled = true;
 		drive = new Drive(true);
 		OI = new OI();
-		ultrasonic = new DistanceSensor(IDs.ultrasonic_0);
-		ports = new UltrasonicSerial();
-		navX = new AHRS(SPI.Port.kMXP);
-		lidar = new Lidar(I2C.Port.kMXP);
-		
-		lidar.start();
+		sensors = new Sensors();
 	}
-	
-	public void dumpInfo () {
+
+	public void dumpInfo() {
 		if (isEnabled) {
-			SmartDashboard.putNumber("Voltage: ", ultrasonic.getVoltages());
-                        SmartDashboard.putNumber("Average Voltage: ", ultrasonic.getAverageVolts());
-                        SmartDashboard.putNumber("Average Distance: ", ultrasonic.getDistanceAverage());
-			SmartDashboard.putNumber("Distance Sensor (serial)", ports.getDistance());
-			SmartDashboard.putString("Serial Output: ", ports.PortReadout());
-			SmartDashboard.putNumber("Average Volts", ultrasonic.getAverageVoltage());
-			SmartDashboard.putNumber("Volts", ultrasonic.getVoltage());
+			/*
+			SmartDashboard.putNumber("Voltage: ", sensors.ultrasonic.getVoltages());
+			SmartDashboard.putNumber("Average Voltage: ", sensors.ultrasonic.getAverageVolts());
+			SmartDashboard.putNumber("Average Distance: ", sensors.ultrasonic.getDistanceAverage());
+			SmartDashboard.putNumber("Distance Sensor (serial)", sensors.ports.getDistance());
+			SmartDashboard.putString("Serial Output: ", sensors.ports.PortReadout());
+			SmartDashboard.putNumber("Average Volts", sensors.ultrasonic.getAverageVoltage());
+			SmartDashboard.putNumber("Volts", sensors.ultrasonic.getVoltage());
+			*/
+			SmartDashboard.putNumber("Distance", sensors.ultrasonic.getVoltage());
+			/*
 			SmartDashboard.putNumber("L Encoder", drive.Lenc.getRaw());
 			SmartDashboard.putNumber("R Encoder", drive.Renc.getRaw());
-
+			*/
 			SmartDashboard.putNumber("L Distance", drive.Lenc.getDistance());
 			SmartDashboard.putNumber("R Distance", drive.Renc.getDistance());
-			
+
 			SmartDashboard.putNumber("L Speed", drive.Lenc.getRate());
 			SmartDashboard.putNumber("R Speed", drive.Renc.getRate());
-			SmartDashboard.putString("Distance: ", ports.PortReadout());
-			SmartDashboard.putNumber("LIDAR Distance: ", lidar.getDistance());
-			SmartDashboard.putNumber("Yaw: ", navX.getYaw());
-			
-			// now in meters
-			String disps = "(" + navX.getDisplacementX() + ", " + navX.getDisplacementY() + ", " + navX.getDisplacementZ() + ")";
-			SmartDashboard.putString("NavX Displacements: ", disps);
+			SmartDashboard.putNumber("Distance: ", sensors.ultrasonic.getDistance());
+			SmartDashboard.putNumber("Yaw: ", sensors.navX.getYaw());
+
 		}
 	}
 }

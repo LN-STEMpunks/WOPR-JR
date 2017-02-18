@@ -28,18 +28,16 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import team3966.robot.commands.AutoGearPeg;
-import team3966.robot.commands.AutoLeftPosition;
+import team3966.robot.commands.AutonomousLeft;
 
 import team3966.robot.subsystems.Subsystems;
 
-import team3966.robot.commands.Autonomous;
 import team3966.robot.commands.DriveCircle;
 import team3966.robot.commands.DrivePoints;
 import team3966.robot.commands.TankDrive;
 import team3966.robot.commands.TankDriveAngle;
 import team3966.robot.commands.TankDriveDistance;
-import team3966.robot.commands.AutoLeftPosition;
+import team3966.robot.commands.AutonomousLeft;
 
 /**
  * Our 2017 robot code
@@ -61,19 +59,14 @@ public class Robot extends IterativeRobot {
 
         // teleopCommand = new TankDrive();
         teleopCommand = new TankDrive();
-
-        // stay still during autonomous
-        autonomousCommand = new Autonomous();
         
         autoChooser = new SendableChooser();
-        autoChooser.addDefault("Default", new Autonomous());
         autoChooser.addObject("Circle (1m)", new DriveCircle(1));
         autoChooser.addObject("Circle (2m)", new DriveCircle(2));
         autoChooser.addObject("Drive forward (1m)", new TankDriveDistance(2, 2));
         autoChooser.addObject("Turn (90 d)", new TankDriveAngle(90));
-        autoChooser.addObject("Gear Peg (Tyler)", new AutoGearPeg());
         autoChooser.addObject("Test Points", new DrivePoints(new double[][] {{0, .35}, {-.7, 0}, {.7, .7}}, false));
-        autoChooser.addObject("Left Auto", new AutoLeftPosition());
+        autoChooser.addObject("Left Auto", new AutonomousLeft());
         SmartDashboard.putData("Auto Program", autoChooser);
         
     }

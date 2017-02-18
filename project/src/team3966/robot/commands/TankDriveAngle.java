@@ -34,7 +34,7 @@ public class TankDriveAngle extends BaseCommand {
 
         angle = _angle;
 
-        source = new NavXPIDSource(systems.navX);
+        source = new NavXPIDSource(systems.sensors.navX);
 
         MotorTurnPIDOutput out = new MotorTurnPIDOutput(new DriveMotor[]{
             systems.drive.L0, systems.drive.L1
