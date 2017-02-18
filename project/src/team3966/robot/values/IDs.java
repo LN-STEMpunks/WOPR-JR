@@ -56,5 +56,9 @@ public class IDs {
 	
 	// not sure if we are using this
 	public static final int ultrasonic_0 = 0;
+        public static final int gearbox_shifter1 = 0;
+        public static final int gearbox_shifter2 = 1;
+        public static final int left_gearcylinder = 2;
+        public static final int right_gearcylider = 3;
 
 }

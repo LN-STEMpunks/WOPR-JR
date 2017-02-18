@@ -5,14 +5,16 @@
  */
 package team3966.robot.hardware;
 
+import team3966.robot.values.IDs;
+
 import edu.wpi.first.wpilibj.Solenoid;
 /**
  *
  * @author Tyler Duckworth
  */
 public class GearHolderPneumaticsController {
-    Solenoid leftsolenoid = new Solenoid(0);
-    Solenoid rightsolenoid = new Solenoid(1);
+    Solenoid leftsolenoid = new Solenoid(IDs.left_gearcylinder);
+    Solenoid rightsolenoid = new Solenoid(IDs.right_gearcylider);
     public boolean RightStatus() {
         boolean rightstatus = rightsolenoid.get();
         return rightstatus;
