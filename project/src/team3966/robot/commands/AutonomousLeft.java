@@ -10,9 +10,9 @@ import java.util.Timer;
  *
  * @author Ethan Duckworth
  */
-public class AutoLeftPosition extends CommandGroup {
+public class AutonomousLeft extends CommandGroup {
 
-    public AutoLeftPosition() {/*
+    public AutonomousLeft() {/*
         addSequential(new TankDriveDistance(2.928366, 2.928366));
         addSequential(new TankDriveAngle(60));*/
         //addSequential(new AlignToGearPeg());

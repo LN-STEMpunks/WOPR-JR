@@ -3,14 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package team3966.robot.commands;
+package team3966.robot.hardware;
 
 import edu.wpi.first.wpilibj.Solenoid;
 /**
  *
  * @author Tyler Duckworth
  */
-public class GearPneumaticsController {
+public class GearHolderPneumaticsController {
     Solenoid leftsolenoid = new Solenoid(0);
     Solenoid rightsolenoid = new Solenoid(1);
     public boolean RightStatus() {

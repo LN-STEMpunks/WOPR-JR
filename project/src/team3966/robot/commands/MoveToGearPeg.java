@@ -73,23 +73,6 @@ public class MoveToGearPeg extends BaseCommand {
         //PID.setSetpoint(width / 2.0);
     }
 
-    protected boolean isFinished() {
-    	return false;
-        //return PID.get() < 0;
-    }
-
-    // if it has wiggled accross too much.
-    // We need this method because of latency, the PID loop doesn't work with NT values :(
-    private boolean hasWiggled() {
-        int changes = 0;
-        for (int i = 1; i < vals.length; ++i) {
-            if (Math.signum(vals[i] - PID.getSetpoint()) != Math.signum(vals[i - 1] - PID.getSetpoint())) {
-                changes++;
-            }
-        }
-        return changes >= 2;
-    }
-
     protected void execute() {
         vals[valsIdx] = source.lastVal;
         valsIdx = (valsIdx + 1) % 20;
@@ -97,6 +80,12 @@ public class MoveToGearPeg extends BaseCommand {
         /*if (PID.onTarget()) {
             end();
         }*/
+    }
+
+
+    protected boolean isFinished() {
+        return systems.sensors.ultrasonic.getDistance() <= .5;
+        //return PID.get() < 0;
     }
 
     protected void interrupted() {
