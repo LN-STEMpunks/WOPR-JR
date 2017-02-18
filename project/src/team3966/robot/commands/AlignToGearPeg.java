@@ -70,7 +70,6 @@ public class AlignToGearPeg extends BaseCommand {
         //double width = (NetworkTable.getTable("vision/gearpeg").getNumber("camwidth", 320));
         //PID.setInputRange(0, width);
         //PID.setSetpoint(width / 2.0);
-        PID.setToleranceBuffer(5);
     }
 
     protected boolean isFinished() {
