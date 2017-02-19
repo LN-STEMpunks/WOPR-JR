@@ -4,7 +4,6 @@ import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.SPI;
-import team3966.robot.hardware.GearHolderPneumaticsController;
 
 import team3966.robot.values.IDs;
 import team3966.robot.hardware.DistanceSensor;
@@ -17,13 +16,11 @@ public class Sensors extends Subsystem {
     public Lidar lidar;
     public AHRS navX;
     public PDPManager pdp;
-    public GearHolderPneumaticsController gpc;
 
     public Sensors() {
         ultrasonic = new DistanceSensor(IDs.ultrasonic_0);
         navX = new AHRS(SPI.Port.kMXP);
         lidar = new Lidar(I2C.Port.kMXP);
-        gpc = new GearHolderPneumaticsController();
         pdp = new PDPManager();
 
         lidar.start();

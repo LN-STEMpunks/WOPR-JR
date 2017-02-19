@@ -52,16 +52,29 @@ public class TankDrive extends BaseCommand {
         RPID.setAbsoluteTolerance(MotorEncoder.MAX_TOLERANCE_SPEED);
     }
 
-    protected void initialize() {
+    protected void initialize() {/*
         LPID.enable();
         RPID.enable();
         LPID.setSetpoint(0.0);
-        RPID.setSetpoint(0.0);
+        RPID.setSetpoint(0.0);*/
     }
 
     protected void execute() {
+        double Lpow = cont.getAxis(PS4Buttons.STICK_LEFT_Y_AXIS);
+        double Rpow = cont.getAxis(PS4Buttons.STICK_RIGHT_Y_AXIS);
+        systems.drive.tank_power(Lpow, Rpow);
+        systems.drive.climb.set(cont.getAxis(PS4Buttons.R_TRIGGER_AXIS) + 1);
+        systems.drive.stir.set(.15);
+        systems.drive.intake.set(Math.abs(Lpow + Rpow) / 2.0);
+        if (cont.getButton(PS4Buttons.X)) {
+            systems.drive.mouth.enable();
+        } else if (cont.getButton(PS4Buttons.SQUARE)) {
+            systems.drive.mouth.disable();
+        }
+        /*
         LPID.setSetpoint(MotorEncoder.MAX_SPEED * cont.getAxis(PS4Buttons.STICK_LEFT_Y_AXIS));
         RPID.setSetpoint(MotorEncoder.MAX_SPEED * cont.getAxis(PS4Buttons.STICK_RIGHT_Y_AXIS));
+        */
     }
 
     protected void interrupted() {
@@ -69,8 +82,8 @@ public class TankDrive extends BaseCommand {
     }
 
     protected void end() {
-        systems.drive.stop();
+        systems.drive.stop();/*
         LPID.disable();
-        RPID.disable();
+        RPID.disable();*/
     }
 }

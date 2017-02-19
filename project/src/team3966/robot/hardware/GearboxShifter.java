@@ -13,8 +13,9 @@ import edu.wpi.first.wpilibj.Solenoid;
  * @author Ethan Duckworth
  */
 public class GearboxShifter {
+    /*
     Solenoid leftmotor = new Solenoid(IDs.gearbox_shifter1);
     Solenoid rightmotot = new Solenoid(IDs.gearbox_shifter2);
-    
+    */
     
 }
