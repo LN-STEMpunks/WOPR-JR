@@ -13,6 +13,8 @@ Clone the repository:
 
 Now, `cd project`
 
+Download [this](http://www.ctr-electronics.com/control-system/hro.html#product_tabs_technical_resources), unzip, and follow the readme.
+
 ## Developing
 
 First, follow [Getting Started](#getting-started), then:
