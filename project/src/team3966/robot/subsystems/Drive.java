@@ -1,5 +1,6 @@
 package team3966.robot.subsystems;
 
+import com.ctre.CANTalon;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -25,6 +26,8 @@ import team3966.robot.hardware.SolenoidHandler;
 public class Drive extends Subsystem {
 
     public DriveMotor L0, L1, R0, R1, stir, intake, climb;
+    
+    public CANTalon shooter;
     
     public SolenoidHandler gate, mouth, gearBox;
     public Compressor comp;
