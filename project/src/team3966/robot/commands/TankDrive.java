@@ -67,14 +67,18 @@ public class TankDrive extends BaseCommand {
         systems.drive.stir.set(.15);
         systems.drive.intake.set(Math.abs(Lpow + Rpow) / 2.0);
         if (cont.getButton(PS4Buttons.X)) {
-            systems.drive.mouth.enable();
-        } else if (cont.getButton(PS4Buttons.SQUARE)) {
-            systems.drive.mouth.disable();
+            systems.drive.gearBox.toggle();
+        }
+        if (cont.getButton(PS4Buttons.SQUARE)) {
+            systems.drive.gate.toggle();
+        }
+        if (cont.getButton(PS4Buttons.CIRCLE)) {
+            systems.drive.mouth.toggle();
         }
         /*
         LPID.setSetpoint(MotorEncoder.MAX_SPEED * cont.getAxis(PS4Buttons.STICK_LEFT_Y_AXIS));
         RPID.setSetpoint(MotorEncoder.MAX_SPEED * cont.getAxis(PS4Buttons.STICK_RIGHT_Y_AXIS));
-        */
+         */
     }
 
     protected void interrupted() {

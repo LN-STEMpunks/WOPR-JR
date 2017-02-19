@@ -5,8 +5,6 @@
  */
 package team3966.robot.hardware;
 
-import team3966.robot.values.IDs;
-
 import edu.wpi.first.wpilibj.Solenoid;
 
 /**
@@ -19,7 +17,7 @@ public class SolenoidHandler {
 
     boolean areTogether, isInverted;
     
-    boolean def;
+    boolean def, last;
 
     public SolenoidHandler(int _A, int _B, boolean _areTogether, boolean _isInverted) {
         A = new Solenoid(_A);
@@ -27,18 +25,33 @@ public class SolenoidHandler {
         areTogether = _areTogether;
         isInverted = _isInverted;
         def = !isInverted;
+        last = false;
     }
 
     public SolenoidHandler(int _A, int _B, boolean _areTogether) {
-        new SolenoidHandler(_A, _B, _areTogether, false);
+       this(_A, _B, _areTogether, false);
+    }
+    
+    public void toggle() {
+        set(!last);
+    }
+    
+    public void set(boolean on) {
+        if (on) {
+            enable();
+        } else {
+            disable();
+        }
     }
 
     public void enable() {
+        last = true;
         A.set(def);
         B.set(def ^ !areTogether);
     }
 
     public void disable() {
+        last = false;
         A.set(!def);
         B.set(!def ^ !areTogether);
     }
