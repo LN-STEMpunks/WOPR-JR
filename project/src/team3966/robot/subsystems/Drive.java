@@ -37,19 +37,24 @@ public class Drive extends Subsystem {
     //public MotorPIDSource Lsource, Rsource;//, Ssource;
     //public PIDController LPID, RPID;//, SPID;
     public Drive(boolean _usePID) {
-        comp = new Compressor();
+        comp = new Compressor(0);
+        comp.start();
         
         gate = new SolenoidHandler(IDs.gearGateOpen, IDs.gearGateClose, false);
-        mouth = new SolenoidHandler(IDs.gearIntakeTighten, IDs.gearIntakeLower, false);
-        gearBox = new SolenoidHandler(IDs.gearboxHighGear, IDs.gearboxHighGear, false);
+        //mouth = new SolenoidHandler(IDs.gearIntakeTighten, IDs.gearIntakeLower, false);
+        //gearBox = new SolenoidHandler(IDs.gearboxHighGear, IDs.gearboxHighGear, false);
+        
         
         Lenc = new MotorEncoder(IDs.L_encoder_dio);
         Renc = new MotorEncoder(IDs.R_encoder_dio);
 
         //Lenc.setReverseDirection(true);
         stir = new DriveMotor(IDs.Stir_motor);
+        stir.setInverted(true);
         climb = new DriveMotor(IDs.Climb_motor);
         intake = new DriveMotor(IDs.Intake_motor);
+        
+        shooter = new CANTalon(2);
 
         L0 = new DriveMotor(IDs.L0_motor);
         L1 = new DriveMotor(IDs.L1_motor);
