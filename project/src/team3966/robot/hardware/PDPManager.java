@@ -1,7 +1,13 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * L&N STEMpunks c 2017
+ *
+ * WOPR-JR.
+ *
+ * Full repo: github.com/ln-stempunks/WOPR-JR
+ *
+ * Full licensing here: programming.lnstempunks.org/licensing
+ *
+ * GPLv3
  */
 package team3966.robot.hardware;
 
@@ -10,10 +16,6 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Time;
-import java.time.Instant;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -24,16 +26,18 @@ public class PDPManager {
     public final String FILE = "/home/lvuser/pdp.log";
     PowerDistributionPanel pdp = new PowerDistributionPanel();
     double max = 0;
-    long stime;
+    long stime, ltime;
     FileWriter towrite;
     boolean isGood = false;
 
     public PDPManager() {
-        stime = System.nanoTime();
     }
 
     public void startLogging() {
         if (!isGood) {
+            stime = System.nanoTime();
+            ltime = stime;
+
             try {
                 PrintWriter writer;
                 writer = new PrintWriter(FILE);
@@ -57,7 +61,7 @@ public class PDPManager {
     }
 
     public double[] channelVoltage() {
-        String csvrow = System.nanoTime() + ",";
+        String csvrow = ((System.nanoTime()-stime)*Math.pow(10, -9)) + ",";
         double[] channelvolts = new double[16];
         double sum = 0;
         for (int i = 0; i < 16; i++) {
@@ -68,10 +72,14 @@ public class PDPManager {
         }
         csvrow += ",";
         if (isGood) {
-            try {
-                towrite.append(csvrow);
-            } catch (IOException ex) {
+            if ((System.nanoTime() - ltime) * Math.pow(10, -9) > .5) {
+                ltime = System.nanoTime();
+                try {
+                    towrite.append(csvrow);
+                } catch (IOException ex) {
+                }
             }
+
         }
         max = Math.max(max, sum);
         return channelvolts;

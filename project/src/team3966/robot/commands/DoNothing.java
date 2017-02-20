@@ -1,16 +1,17 @@
+/*
+ * L&N STEMpunks c 2017
+ *
+ * WOPR-JR.
+ *
+ * Full repo: github.com/ln-stempunks/WOPR-JR
+ *
+ * Full licensing here: programming.lnstempunks.org/licensing
+ *
+ * GPLv3
+ */
 package team3966.robot.commands;
 
-import edu.wpi.first.wpilibj.PIDController;
-import team3966.robot.Robot;
-import team3966.robot.hardware.MotorEncoder;
-import team3966.robot.subsystems.Subsystems;
-import team3966.robot.values.PS4Buttons;
-import team3966.robot.hardware.Controller;
-import team3966.robot.pidcontrollers.MotorPIDOutput;
-import team3966.robot.pidcontrollers.MotorPIDSource;
-
 public class DoNothing extends BaseCommand {
-
     
     private double time;
     private long stime;
