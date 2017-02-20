@@ -1,9 +1,11 @@
 package team3966.robot.subsystems;
 
 import com.ctre.CANTalon;
+import com.ctre.CANTalon.FeedbackDevice;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.Solenoid;
 
@@ -40,8 +42,8 @@ public class Drive extends Subsystem {
         comp = new Compressor(0);
         comp.start();
         
-        gate = new SolenoidHandler(IDs.gearGateOpen, IDs.gearGateClose, false);
-        //mouth = new SolenoidHandler(IDs.gearIntakeTighten, IDs.gearIntakeLower, false);
+        gate = new SolenoidHandler(IDs.gearGateOpen, IDs.gearGateClose, false, true);
+        mouth = new SolenoidHandler(IDs.gearIntakeTighten, IDs.gearIntakeLower, false);
         //gearBox = new SolenoidHandler(IDs.gearboxHighGear, IDs.gearboxHighGear, false);
         
         
@@ -55,7 +57,20 @@ public class Drive extends Subsystem {
         intake = new DriveMotor(IDs.Intake_motor);
         
         shooter = new CANTalon(2);
-
+        SmartDashboard.putData("SHOOTER", shooter);
+        shooter.setFeedbackDevice(FeedbackDevice.CtreMagEncoder_Relative);
+        
+        shooter.configNominalOutputVoltage(+0.0f, -0.0f);
+        shooter.configPeakOutputVoltage(+12.0f, -12.0f);
+        
+        shooter.setProfile(0);
+        shooter.setF(.1097);
+        shooter.setD(0);
+        shooter.setI(0);
+        shooter.setP(0.22);
+        
+        
+        
         L0 = new DriveMotor(IDs.L0_motor);
         L1 = new DriveMotor(IDs.L1_motor);
 

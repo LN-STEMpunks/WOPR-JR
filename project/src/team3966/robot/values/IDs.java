@@ -52,13 +52,13 @@ public class IDs {
     // not sure if we are using this
     public static final int ultrasonic_0 = 0;
 
-    public static final int gearboxHighGear = 0;
-    public static final int gearboxLowGear = 1;
+    public static final int gearboxHighGear = 4;
+    public static final int gearboxLowGear = 5;
 
-    public static final int gearGateOpen = 2;
-    public static final int gearGateClose = 3;
+    public static final int gearGateOpen = 0;
+    public static final int gearGateClose = 1;
 
-    public static final int gearIntakeLower = 4;
-    public static final int gearIntakeTighten = 5;
+    public static final int gearIntakeLower = 2;
+    public static final int gearIntakeTighten = 3;
 
 }

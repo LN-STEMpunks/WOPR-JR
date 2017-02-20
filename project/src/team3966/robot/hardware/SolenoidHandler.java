@@ -17,7 +17,7 @@ public class SolenoidHandler {
 
     boolean areTogether, isInverted;
     
-    boolean def, last;
+    public boolean def, last;
 
     public SolenoidHandler(int _A, int _B, boolean _areTogether, boolean _isInverted) {
         A = new Solenoid(_A);
@@ -26,6 +26,7 @@ public class SolenoidHandler {
         isInverted = _isInverted;
         def = !isInverted;
         last = false;
+        set(!def);
     }
 
     public SolenoidHandler(int _A, int _B, boolean _areTogether) {
