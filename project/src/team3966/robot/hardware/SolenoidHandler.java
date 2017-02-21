@@ -1,7 +1,13 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * L&N STEMpunks c 2017
+ *
+ * WOPR-JR.
+ *
+ * Full repo: github.com/ln-stempunks/WOPR-JR
+ *
+ * Full licensing here: programming.lnstempunks.org/licensing
+ *
+ * GPLv3
  */
 package team3966.robot.hardware;
 

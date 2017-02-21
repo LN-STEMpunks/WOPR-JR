@@ -1,6 +1,16 @@
+/*
+ * L&N STEMpunks c 2017
+ *
+ * WOPR-JR.
+ *
+ * Full repo: github.com/ln-stempunks/WOPR-JR
+ *
+ * Full licensing here: programming.lnstempunks.org/licensing
+ *
+ * GPLv3
+ */
 package team3966.robot.commands;
 
-import com.ctre.CANTalon;
 import edu.wpi.first.wpilibj.PIDController;
 import team3966.robot.Robot;
 import team3966.robot.hardware.MotorEncoder;
@@ -66,13 +76,10 @@ public class TankDrive extends BaseCommand {
         double Lpow = cont.getAxis(PS4Buttons.STICK_LEFT_Y_AXIS);
         double Rpow = cont.getAxis(PS4Buttons.STICK_RIGHT_Y_AXIS);
         systems.drive.tank_power(Lpow, Rpow);
-        //systems.drive.climb.set(cont.getAxis(PS4Buttons.L_TRIGGER_AXIS));
-        {
-            systems.drive.shooter.changeControlMode(CANTalon.TalonControlMode.Speed);
-            systems.drive.shooter.set(-1200);
-        }
-        systems.drive.stir.set(.5);
-        systems.drive.intake.set(.3 + Math.abs(Lpow + Rpow) / 4.0);
+        systems.drive.climb.set(cont.getAxis(PS4Buttons.L_TRIGGER_AXIS)+1);
+        systems.drive.shooter.set(cont.getAxis(PS4Buttons.R_TRIGGER_AXIS)+1);
+        systems.drive.stir.set(.75);
+        systems.drive.intake.set(.5 + (Math.abs(Lpow)+Math.abs(Rpow)) / 4.0);
         if (cont.getButton(PS4Buttons.X) && systems.drive.gate.last) {
             systems.drive.mouth.enable();
         } else if (cont.getButton(PS4Buttons.SQUARE)) {

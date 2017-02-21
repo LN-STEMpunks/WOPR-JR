@@ -1,8 +1,13 @@
 /*
- * IDs.java
- * 
- * Holds info for all DIOs, PWM, etc
- * 
+ * L&N STEMpunks c 2017
+ *
+ * WOPR-JR.
+ *
+ * Full repo: github.com/ln-stempunks/WOPR-JR
+ *
+ * Full licensing here: programming.lnstempunks.org/licensing
+ *
+ * GPLv3
  */
 package team3966.robot.values;
 
@@ -20,15 +25,17 @@ public class IDs {
 	 * CANS/PWM
 	 * 
      */
-    public static final int L0_motor = 2;
-    public static final int L1_motor = 3;
+    public static final int L0Motor = 2;
+    public static final int L1Motor = 3;
 
-    public static final int R0_motor = 0;
-    public static final int R1_motor = 1;
+    public static final int R0Motor = 0;
+    public static final int R1Motor = 1;
 
-    public static final int Climb_motor = 4;
-    public static final int Intake_motor = 5;
-    public static final int Stir_motor = 6;
+    public static final int climbMotor = 4;
+    public static final int intakeMotor = 5;
+    public static final int stirMotor = 6;
+
+    public static final int shooterMotor = 7;
 
     /*
 	 * 

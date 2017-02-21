@@ -1,20 +1,22 @@
+/*
+ * L&N STEMpunks c 2017
+ *
+ * WOPR-JR.
+ *
+ * Full repo: github.com/ln-stempunks/WOPR-JR
+ *
+ * Full licensing here: programming.lnstempunks.org/licensing
+ *
+ * GPLv3
+ */
 package team3966.robot.commands;
 
 import edu.wpi.first.wpilibj.PIDController;
-import edu.wpi.first.wpilibj.networktables.NetworkTable;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import team3966.robot.Robot;
-import team3966.robot.hardware.MotorEncoder;
 import team3966.robot.subsystems.Subsystems;
-import team3966.robot.values.PS4Buttons;
 import team3966.robot.hardware.Controller;
 import team3966.robot.hardware.DriveMotor;
-import team3966.robot.pidcontrollers.MotorPIDOutput;
-import team3966.robot.pidcontrollers.MotorPIDSource;
 import team3966.robot.pidcontrollers.MotorTurnAndMovePIDOutput;
-import team3966.robot.pidcontrollers.MotorTurnPIDOutput;
 import team3966.robot.pidcontrollers.NetworkTablePIDSource;
 
 public class MoveToGearPeg extends BaseCommand {
@@ -56,7 +58,6 @@ public class MoveToGearPeg extends BaseCommand {
         PID = new PIDController(kP, kI, kD, source, out);
         PID.setToleranceBuffer(8);
         
-        //PID.setInputRange(-1, NetworkTable.getTable("vision/gearpeg").getNumber("camwidth", 320));
         PID.setInputRange(-1, CAMERA_WIDTH);
         PID.setOutputRange(-.03, .03);
 
@@ -68,18 +69,11 @@ public class MoveToGearPeg extends BaseCommand {
     protected void initialize() {
         PID.enable();
         PID.setSetpoint(MIDDLE_OF_CAMERA);
-        //double width = (NetworkTable.getTable("vision/gearpeg").getNumber("camwidth", 320));
-        //PID.setInputRange(0, width);
-        //PID.setSetpoint(width / 2.0);
     }
 
     protected void execute() {
         vals[valsIdx] = source.lastVal;
         valsIdx = (valsIdx + 1) % 20;
-        //PID.setSetpoint();
-        /*if (PID.onTarget()) {
-            end();
-        }*/
     }
 
 

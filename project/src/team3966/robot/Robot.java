@@ -1,25 +1,13 @@
 /*
-	2017 L&N STEMpunks
-
-	lnstempunks.org
-	
-	Robot code for WOPR-JR, our 2016-2017 season robot.
-	
-	
-
-Authors:
-	Cade Brown <cade@cade.site>
-	Tyler Duckworth <>
-
-
-Website:
-	programming.lnstempunks.org (or ln-stempunks.github.io)
-
-License:
-	GPLv3, see LICENSE.md for more.
-	
-	Free as in FREEDOM.
-
+ * L&N STEMpunks c 2017
+ *
+ * WOPR-JR.
+ *
+ * Full repo: github.com/ln-stempunks/WOPR-JR
+ *
+ * Full licensing here: programming.lnstempunks.org/licensing
+ *
+ * GPLv3
  */
 package team3966.robot;
 
@@ -56,25 +44,21 @@ public class Robot extends IterativeRobot {
     public void robotInit() {
         subsystems = new Subsystems();
 
-        // teleopCommand = new TankDrive();
         teleopCommand = new TankDrive();
         
         autoChooser = new SendableChooser();
         autoChooser.addObject("Circle (1m)", new DriveCircle(1));
         autoChooser.addObject("Circle (2m)", new DriveCircle(2));
+        
         autoChooser.addObject("Drive forward (1m)", new TankDriveDistance(2, 2));
         autoChooser.addObject("Turn (90 d)", new TankDriveAngle(90));
         autoChooser.addObject("Test Points", new DrivePoints(new double[][] {{0, .35}, {-.7, 0}, {.7, .7}}, false));
         autoChooser.addObject("Left Auto", new AutonomousLeft());
+        
         SmartDashboard.putData("Auto Program", autoChooser);
         
     }
 
-    /*
-	
-		These functions are called right before autonomous/teleop
-	
-     */
     public void disabledInit() {
 
     }
@@ -98,11 +82,6 @@ public class Robot extends IterativeRobot {
         }
     }
 
-    /*
-	 
-	  This function is called periodically during autonomous/teleop
-	 
-     */
     public void autonomousPeriodic() {
         subsystems.sensors.pdp.startLogging();
         Scheduler.getInstance().run();
