@@ -48,7 +48,7 @@ public class Subsystems {
             
             SmartDashboard.putNumber("Yaw: ", sensors.navX.getYaw());
             
-            SmartDashboard.putString("PDP Voltage (0 to 15): ", Arrays.toString(sensors.pdp.channelVoltage()));
+            SmartDashboard.putString("PDP Current: ", Arrays.toString(sensors.pdp.channelCurrent()));
             SmartDashboard.putNumber("Battery Voltage", DriverStation.getInstance().getBatteryVoltage());
 
             infoTable.putNumber("BatteryVoltage", DriverStation.getInstance().getBatteryVoltage());

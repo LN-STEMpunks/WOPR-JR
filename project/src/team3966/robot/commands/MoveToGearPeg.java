@@ -32,7 +32,7 @@ public class MoveToGearPeg extends BaseCommand {
     private int valsIdx = 0;
 
     // PID constants
-    public static final double kP = 0.0016;
+    public static final double kP = 0.03;
     public static final double kI = 0.0;
     public static final double kD = 0.0;
 
@@ -78,7 +78,8 @@ public class MoveToGearPeg extends BaseCommand {
 
 
     protected boolean isFinished() {
-        return systems.sensors.ultrasonic.getDistance() <= .5;
+        return false;
+        ///return systems.sensors.ultrasonic.getDistance() <= .5;
         //return PID.get() < 0;
     }
 

@@ -48,12 +48,15 @@ public class Drive extends Subsystem {
         gearBox = new SolenoidHandler(IDs.gearboxLowGear, IDs.gearboxHighGear, false);
         
         Lenc = new MotorEncoder(IDs.L_encoder_dio);
+        Lenc.setReverseDirection(true);
+        
         Renc = new MotorEncoder(IDs.R_encoder_dio);
+        
+        climb = new DriveMotor(IDs.climbMotor);
+        intake = new DriveMotor(IDs.intakeMotor);
 
         stir = new DriveMotor(IDs.stirMotor);
         stir.setInverted(true);
-        climb = new DriveMotor(IDs.climbMotor);
-        intake = new DriveMotor(IDs.intakeMotor);
         
         shooter = new DriveMotor(IDs.shooterMotor);
         shooter.setInverted(true);

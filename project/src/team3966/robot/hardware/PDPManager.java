@@ -60,7 +60,7 @@ public class PDPManager {
         return inputvolts;
     }
 
-    public double[] channelVoltage() {
+    public double[] channelCurrent(){
         String csvrow = ((System.nanoTime()-stime)*Math.pow(10, -9)) + ",";
         double[] channelvolts = new double[16];
         double sum = 0;
@@ -71,16 +71,16 @@ public class PDPManager {
             csvrow += amps + ",";
         }
         csvrow += ",";
-        if (isGood) {
-            if ((System.nanoTime() - ltime) * Math.pow(10, -9) > .5) {
-                ltime = System.nanoTime();
-                try {
-                    towrite.append(csvrow);
-                } catch (IOException ex) {
-                }
-            }
-
-        }
+//        if (isGood) {
+//            if ((System.nanoTime() - ltime) * Math.pow(10, -9) > .5) {
+//                ltime = System.nanoTime();
+//                try {
+//                    towrite.append(csvrow);
+//                } catch (IOException ex) {
+//                }
+//            }
+//
+//        }
         max = Math.max(max, sum);
         return channelvolts;
     }

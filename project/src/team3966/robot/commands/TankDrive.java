@@ -28,14 +28,14 @@ public class TankDrive extends BaseCommand {
     private PIDController LPID, RPID;
 
     // PID constants
-    public static final double kLP = 0.24;
-    public static final double kLI = 0.15;
-    public static final double kLD = 0.2;
+    public static final double kLP = 0.05;
+    public static final double kLI = 0.0;
+    public static final double kLD = 0.0;
     public static final double kLF = 0.0;
 
-    public static final double kRP = 0.29;
-    public static final double kRI = 0.16;
-    public static final double kRD = 0.15;
+    public static final double kRP = 0.05;
+    public static final double kRI = 0.0;
+    public static final double kRD = 0.0;
     public static final double kRF = 0.0;
 
     public TankDrive() {
@@ -65,29 +65,50 @@ public class TankDrive extends BaseCommand {
 
     boolean LgearBox = false, lGate = false, lMouth = false;
 
-    protected void initialize() {/*
+    protected void initialize() {
+        /*
         LPID.enable();
         RPID.enable();
-        LPID.setSetpoint(0.0);
+        LPID.setSetpoint(0.0);puh 
         RPID.setSetpoint(0.0);*/
     }
 
     protected void execute() {
+        
         double Lpow = cont.getAxis(PS4Buttons.STICK_LEFT_Y_AXIS);
         double Rpow = cont.getAxis(PS4Buttons.STICK_RIGHT_Y_AXIS);
+        
         systems.drive.tank_power(Lpow, Rpow);
-        systems.drive.climb.set(cont.getAxis(PS4Buttons.L_TRIGGER_AXIS)+1);
+        
+        //LPID.setSetpoint(.1);
+        //RPID.setSetpoint(.1);
+        
+        
+        // not driving
+        double cpower = cont.getAxis(PS4Buttons.L_TRIGGER_AXIS)+1;
+        
+        systems.drive.climb.set(cpower * cpower);
         systems.drive.shooter.set(cont.getAxis(PS4Buttons.R_TRIGGER_AXIS)+1);
-        systems.drive.stir.set(.75);
-        systems.drive.intake.set(.5 + (Math.abs(Lpow)+Math.abs(Rpow)) / 4.0);
+        //systems.drive.shooter.set(1.25);
+        systems.drive.stir.set(1.0);
+        systems.drive.intake.set(.6 + .4 * (Math.abs(Lpow)+Math.abs(Rpow)) / 2.0);
+        //systems.drive.intake.set(.8);
+        
+        if (cont.getButton(PS4Buttons.R1)) {
+            systems.drive.gearBox.enable();
+        } else if (cont.getButton(PS4Buttons.L1)) {
+            systems.drive.gearBox.disable();
+        }
+        
         if (cont.getButton(PS4Buttons.X) && systems.drive.gate.last) {
             systems.drive.mouth.enable();
         } else if (cont.getButton(PS4Buttons.SQUARE)) {
             systems.drive.mouth.disable();
         }
-        if (cont.getButton(PS4Buttons.CIRCLE)) {
+        
+        if (cont.getButton(PS4Buttons.TRIANGLE)) {
             systems.drive.gate.enable();
-        } else if (cont.getButton(PS4Buttons.TRIANGLE) && !systems.drive.mouth.last) {
+        } else if (cont.getButton(PS4Buttons.CIRCLE) && !systems.drive.mouth.last) {
             systems.drive.gate.disable();
         }
     }
@@ -97,8 +118,8 @@ public class TankDrive extends BaseCommand {
     }
 
     protected void end() {
-        systems.drive.stop();/*
+        systems.drive.stop();
         LPID.disable();
-        RPID.disable();*/
+        RPID.disable();
     }
 }
