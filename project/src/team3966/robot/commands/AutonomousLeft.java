@@ -30,14 +30,14 @@ public class AutonomousLeft extends CommandGroup {
         addSequential(new MoveToGearPeg());
         addSequential(new TankDriveDistance(1.357884, 1.357884));
         subsystems.drive.gate.enable();
-        addSequential(new DoNothing(2));
         addSequential(new TankDriveDistance(-0.88633, -0.886333));
+        addSequential(wait);
         subsystems.drive.gate.disable();
         addSequential(new TankDriveAngle(30));
         addSequential(new TankDriveDistance(3.89255, 3.89255));
         addSequential(new TankDriveAngle(45));
         //addSequential(align to boiler tape);
-        //addSequential(subsystems.drive.shooter.set(1));
+        subsystems.drive.shooter.set(1);
         addSequential(new TankDriveAngle(-135));
         addSequential(new TankDriveDistance(1.005967, 1.005967));
         addSequential(new TankDriveAngle(90));
