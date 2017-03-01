@@ -67,5 +67,5 @@ public class IDs {
 
     public static final int gearIntakeLower = 2;
     public static final int gearIntakeTighten = 3;
-    public static final int talonCANID = 3;
+    //public static final int talonCANID = 3;
 }
