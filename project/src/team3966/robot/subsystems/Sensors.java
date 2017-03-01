@@ -31,12 +31,13 @@ public class Sensors extends Subsystem {
     public Sensors() {
         ultrasonic = new DistanceSensor(IDs.ultrasonic_0);
         navX = new AHRS(SPI.Port.kMXP);
-        lidar = new Lidar(I2C.Port.kMXP);
         pdp = new PDPManager();
-
-        lidar.start();
+        lidar = new Lidar();
     }
-
+    public double getLidarDifference () {
+        double difference = lidar.getInches() / lidar.getDistance();
+        return difference;
+    }
     protected void initDefaultCommand() {
 
     }
