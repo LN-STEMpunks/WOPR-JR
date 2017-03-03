@@ -18,7 +18,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import team3966.robot.subsystems.Subsystems;
-
+import team3966.robot.commands.Autonomous3HopperSide;
 import team3966.robot.commands.DriveCircle;
 import team3966.robot.commands.DrivePoints;
 import team3966.robot.commands.TankDrive;
@@ -37,13 +37,13 @@ public class Robot extends IterativeRobot {
     public static Subsystems subsystems;
     
     SendableChooser autoChooser;
-
+    Autonomous3HopperSide hopper3;
     Command autonomousCommand;
     Command teleopCommand;
 
     public void robotInit() {
         subsystems = new Subsystems();
-
+        hopper3 = new Autonomous3HopperSide();
         teleopCommand = new TankDrive();
         
         autoChooser = new SendableChooser();
@@ -55,6 +55,7 @@ public class Robot extends IterativeRobot {
         autoChooser.addObject("Test Points", new DrivePoints(new double[][] {{0, .35}, {-.7, 0}, {.7, .7}}, false));
         autoChooser.addObject("Left Auto", new AutonomousLeft());
         
+        autoChooser.addObject("3 Left Hopppers Left Position", hopper3);
         SmartDashboard.putData("Auto Program", autoChooser);
         
     }
