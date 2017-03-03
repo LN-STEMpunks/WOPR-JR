@@ -90,7 +90,7 @@ public class TankDrive extends BaseCommand {
         systems.drive.climb.set(cpower * cpower);
         systems.drive.shooter.set(cont.getAxis(PS4Buttons.R_TRIGGER_AXIS)+1);
         //systems.drive.shooter.set(1.25);
-        systems.drive.stir.set(1.0);
+        systems.drive.stir.set(-.5);
         systems.drive.intake.set(.6 + .4 * (Math.abs(Lpow)+Math.abs(Rpow)) / 2.0);
         //systems.drive.intake.set(.8);
         
