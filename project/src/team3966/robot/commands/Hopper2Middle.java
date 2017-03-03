@@ -8,7 +8,6 @@ Full licensing here: programming.lnstempunks.org/licensing
 
 GPLv3
 */
-
 package team3966.robot.commands;
 
 /**
@@ -17,12 +16,9 @@ package team3966.robot.commands;
  */
 
 
-public class Autonomous3HopperSide {
-    AutoShell left, middle, right;
-    void LeftSide() {
-    }
-    void Middle() {
-    }
-    void RightSide() {
+public class Hopper2Middle {
+    AutoShell middle;
+    public Hopper2Middle() {
+        middle = new AutoShell(true, 0, 0, false, -1.404355, -90, false, 2, 90, 2);  
     }
 }
