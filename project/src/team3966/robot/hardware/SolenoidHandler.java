@@ -50,6 +50,10 @@ public class SolenoidHandler {
             disable();
         }
     }
+    
+    public boolean get() {
+        return last;
+    }
 
     public void enable() {
         last = true;
@@ -62,4 +66,5 @@ public class SolenoidHandler {
         A.set(!def);
         B.set(!def ^ !areTogether);
     }
+    
 }

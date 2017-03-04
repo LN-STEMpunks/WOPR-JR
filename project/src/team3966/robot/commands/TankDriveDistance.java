@@ -27,6 +27,7 @@ public class TankDriveDistance extends BaseCommand {
     private PIDController LPID, RPID;
 
     // PID constants
+    /* what worked for comp bot
     public static final double kLP = 0.8;
     public static final double kLI = 0.0;
     public static final double kLD = 0.1;
@@ -36,7 +37,18 @@ public class TankDriveDistance extends BaseCommand {
     public static final double kRI = 0.0;
     public static final double kRD = 0.1;
     public static final double kRF = 0.0;
+*/
+    
+    // PID constants
+    public static final double kLP = 1.2;
+    public static final double kLI = 0.0;
+    public static final double kLD = 0.0;
+    public static final double kLF = 0.0;
 
+    public static final double kRP = 1.2;
+    public static final double kRI = 0.0;
+    public static final double kRD = 0.0;
+    public static final double kRF = 0.0;
     private double Ldistance, Rdistance;
 
     public TankDriveDistance(double _Ldistance, double _Rdistance) {
@@ -52,11 +64,15 @@ public class TankDriveDistance extends BaseCommand {
         Lsource.useDistance();
         Rsource.useDistance();
 
-        Lsource.setScale(-1);
+        //Lsource.setScale(-1);
+        //Rsource.setScale(-1);
 
         MotorPIDOutput Lout = new MotorPIDOutput(systems.drive.L0, systems.drive.L1);
         MotorPIDOutput Rout = new MotorPIDOutput(systems.drive.R0, systems.drive.R1);
 
+        Lout.setScale(-1);
+        Rout.setScale(-1);
+        
         LPID = new PIDController(kLP, kLI, kLD, kLF, Lsource, Lout);
         LPID.setInputRange(-MotorEncoder.MAX_DISTANCE, MotorEncoder.MAX_DISTANCE);
         LPID.setOutputRange(-1, 1);
@@ -72,8 +88,9 @@ public class TankDriveDistance extends BaseCommand {
     protected void initialize() {
         LPID.enable();
         RPID.enable();
-        LPID.setSetpoint(systems.drive.Lenc.getDistance() - Ldistance);
-        RPID.setSetpoint(systems.drive.Renc.getDistance() - Rdistance);
+        LPID.setSetpoint(systems.drive.Lenc.getDistance() + Ldistance);
+        RPID.setSetpoint(systems.drive.Renc.getDistance() + Rdistance);
+        systems.drive.gearBox.disable();
     }
 
     protected boolean isFinished() {

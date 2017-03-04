@@ -17,17 +17,18 @@ import edu.wpi.first.wpilibj.Encoder;
 public class MotorEncoder extends Encoder {
 
 	// m/s max speed wheels can turn
-	public static final double MAX_SPEED = .5;
+	public static final double MAX_HIGH_SPEED = 3.5;
+	public static final double MAX_LOW_SPEED = 1.4;
 	// max distance to go, just something huge
 	public static final double MAX_DISTANCE = 10000.0;
 	
 	// in m/s
-	public static final double MAX_TOLERANCE_SPEED = 0.03;
+	public static final double MAX_TOLERANCE_SPEED = .1;
 	// in m
-	public static final double MAX_TOLERANCE_DISTANCE = 0.08;
+	public static final double MAX_TOLERANCE_DISTANCE = 0.02;
 	
 	// in m, found empirically
-	public static final double DISTANCE_PER_TICK = 0.000579239818d;
+	public static final double DISTANCE_PER_TICK = 1.0 / 2950;
 	
 	// no encoder
 	public MotorEncoder(int... channels) {

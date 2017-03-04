@@ -51,7 +51,6 @@ public class Drive extends Subsystem {
         Lenc.setReverseDirection(true);
         
         Renc = new MotorEncoder(IDs.R_encoder_dio);
-        
         climb = new DriveMotor(IDs.climbMotor);
         intake = new DriveMotor(IDs.intakeMotor);
 

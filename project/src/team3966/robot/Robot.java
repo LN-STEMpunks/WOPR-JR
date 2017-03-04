@@ -53,17 +53,19 @@ public class Robot extends IterativeRobot {
         autoChooser.addObject("Circle (1m)", new DriveCircle(1));
         autoChooser.addObject("Circle (2m)", new DriveCircle(2));
         
-        autoChooser.addObject("Drive forward (1m)", new TankDriveDistance(2, 2));
+        autoChooser.addObject("Drive forward (1m)", new TankDriveDistance(1, 1));
+        autoChooser.addObject("Drive forward (2m)", new TankDriveDistance(2, 2));
         autoChooser.addObject("Turn (90 d)", new TankDriveAngle(90));
-        autoChooser.addObject("Test Points", new DrivePoints(new double[][] {{0, .35}, {-.7, 0}, {.7, .7}}, false));
-        autoChooser.addObject("Left Auto", new AutonomousLeft());
-        
+  //      autoChooser.addObject("Test Points", new DrivePoints(new double[][] {{0, .35}, {-.7, 0}, {.7, .7}}, false));
+    //    autoChooser.addObject("Left Auto", new AutonomousLeft());
+        /*
         autoChooser.addObject("3 Left Hoppers Left Position", new LeftSide());
         autoChooser.addObject("3 Left Hoppers Middle Position", new MiddleSide());
         autoChooser.addObject("3 Left Hoppers Right Position", new RightSide());
         autoChooser.addObject("2 Left Hoppers Left Position", new Hopper2Left());
         autoChooser.addObject("2 Left Hoppers Middle Position", new Hopper2Middle());
         autoChooser.addObject("2 Left Hoppers Right Position", new Hopper2Right());
+*/
 
         SmartDashboard.putData("Auto Program", autoChooser);
         

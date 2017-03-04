@@ -22,7 +22,7 @@ public class MotorPIDSource implements PIDSource {
 	private double scale = 1.0;
 
 	// by default, do distance
-	private PIDSourceType sourceType = PIDSourceType.kDisplacement;
+	private PIDSourceType sourceType = PIDSourceType.kRate;
 	
 	public MotorPIDSource(MotorEncoder _encoder) {
 		encoder = _encoder;
