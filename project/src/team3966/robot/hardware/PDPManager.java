@@ -32,7 +32,10 @@ public class PDPManager {
 
     public PDPManager() {
     }
-
+    public double getCurrent(int channel) {
+        double ampage = pdp.getCurrent(channel);
+        return ampage;
+    }
     public void startLogging() {
         if (!isGood) {
             stime = System.nanoTime();

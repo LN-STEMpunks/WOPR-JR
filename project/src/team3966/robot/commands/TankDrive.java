@@ -31,12 +31,12 @@ public class TankDrive extends BaseCommand {
     private boolean enabled = false, inwards = true;
 
     // PID constants
-    public static final double kLP = .25;
+    public static final double kLP = .18;
     public static final double kLI = 0.0;
     public static final double kLD = 0.0;
     public static final double kLF = 0.0;
 
-    public static final double kRP = .25;
+    public static final double kRP = .18;
     public static final double kRI = 0.0;
     public static final double kRD = 0.0;
     public static final double kRF = 0.0;

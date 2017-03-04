@@ -50,6 +50,14 @@ public class Subsystems {
             SmartDashboard.putNumber("Lidar Distance (In Centimeters)", sensors.lidar.getDistance());
             
             SmartDashboard.putString("PDP Current: ", Arrays.toString(sensors.pdp.channelCurrent()));
+            SmartDashboard.getNumber("Current of intake (In Amps):", sensors.pdp.getCurrent(5));
+            SmartDashboard.getNumber("Current of agitator (In Amps):", sensors.pdp.getCurrent(6));
+            SmartDashboard.getNumber("Current of shooter (In Amps):", sensors.pdp.getCurrent(7));
+            SmartDashboard.getNumber("Current of climber (In Amps):", sensors.pdp.getCurrent(4));
+            SmartDashboard.getNumber("Current of drive motor #1 (In Amps):", sensors.pdp.getCurrent(0));
+            SmartDashboard.getNumber("Current of drive motor #2 (In Amps):", sensors.pdp.getCurrent(1));
+            SmartDashboard.getNumber("Current of drive motor #3 (In Amps):", sensors.pdp.getCurrent(2));
+            SmartDashboard.getNumber("Current of drive motor #4 (In Amps):", sensors.pdp.getCurrent(3));
             SmartDashboard.putNumber("Battery Voltage", DriverStation.getInstance().getBatteryVoltage());
             SmartDashboard.getNumber("Diffence between the two values", sensors.getLidarDifference());
             SmartDashboard.getNumber("What the value should be: 2.5399986284 or similar.", 0);
