@@ -30,7 +30,7 @@ public class NavXPIDSource implements PIDSource {
 
 
 	public double pidGet() {
-		return navx.getPitch();
+		return navx.getYaw();
 	}
 
 

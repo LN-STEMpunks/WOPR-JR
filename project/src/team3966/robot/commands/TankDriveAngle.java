@@ -12,6 +12,7 @@
 package team3966.robot.commands;
 
 import edu.wpi.first.wpilibj.PIDController;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import team3966.robot.Robot;
 import team3966.robot.hardware.DriveMotor;
 import team3966.robot.hardware.MotorEncoder;
@@ -30,7 +31,7 @@ public class TankDriveAngle extends BaseCommand {
     private PIDController PID;
 
     // PID constants
-    public static final double kP = 0.02;
+    public static final double kP = .08;
     public static final double kI = 0.0;
     public static final double kD = 0.00;
 
@@ -53,19 +54,19 @@ public class TankDriveAngle extends BaseCommand {
             systems.drive.R0, systems.drive.R1
         });
 
-        out.setScale(-1.0);
+        //out.setScale(-1.0);
 
         PID = new PIDController(kP, kI, kD, source, out);
         PID.setInputRange(-180, 180);
         PID.setContinuous(true);
-        PID.setOutputRange(-.25, .25);
+        PID.setOutputRange(-1, 1);
 
-        PID.setAbsoluteTolerance(4);
+        PID.setAbsoluteTolerance(3);
     }
 
     protected void initialize() {
         //double val = source.pidGet() + (180-angle);
-        double val = source.pidGet() + (angle);
+        double val = source.pidGet() - (angle);
         if (val > 180) {
             val = val - 360;
         } else if (val < -180) {
@@ -80,9 +81,7 @@ public class TankDriveAngle extends BaseCommand {
     }
 
     protected void execute() {
-        if (PID.onTarget()) {
-            end();
-        }
+        SmartDashboard.putData("Angle PID", PID);
         // it has setpoint
     }
 

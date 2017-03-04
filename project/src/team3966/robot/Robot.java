@@ -16,6 +16,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import team3966.robot.commands.AlignToGearPeg;
 
 import team3966.robot.subsystems.Subsystems;
 import team3966.robot.commands.LeftSide;
@@ -30,6 +31,7 @@ import team3966.robot.commands.TankDrive;
 import team3966.robot.commands.TankDriveAngle;
 import team3966.robot.commands.TankDriveDistance;
 import team3966.robot.commands.AutonomousLeft;
+import team3966.robot.commands.MoveToGearPeg;
 
 /**
  * Our 2017 robot code
@@ -56,8 +58,8 @@ public class Robot extends IterativeRobot {
         autoChooser.addObject("Drive forward (1m)", new TankDriveDistance(1, 1));
         autoChooser.addObject("Drive forward (2m)", new TankDriveDistance(2, 2));
         autoChooser.addObject("Turn (90 d)", new TankDriveAngle(90));
-  //      autoChooser.addObject("Test Points", new DrivePoints(new double[][] {{0, .35}, {-.7, 0}, {.7, .7}}, false));
-    //    autoChooser.addObject("Left Auto", new AutonomousLeft());
+        autoChooser.addObject("Align to Gear ", new AlignToGearPeg());
+        autoChooser.addObject("Move to Gear ", new MoveToGearPeg());
         /*
         autoChooser.addObject("3 Left Hoppers Left Position", new LeftSide());
         autoChooser.addObject("3 Left Hoppers Middle Position", new MiddleSide());
@@ -65,8 +67,7 @@ public class Robot extends IterativeRobot {
         autoChooser.addObject("2 Left Hoppers Left Position", new Hopper2Left());
         autoChooser.addObject("2 Left Hoppers Middle Position", new Hopper2Middle());
         autoChooser.addObject("2 Left Hoppers Right Position", new Hopper2Right());
-*/
-
+    */
         SmartDashboard.putData("Auto Program", autoChooser);
         
     }

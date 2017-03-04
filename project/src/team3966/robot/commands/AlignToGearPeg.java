@@ -30,7 +30,7 @@ public class AlignToGearPeg extends BaseCommand {
     private int valsIdx = 0;
 
     // PID constants
-    public static final double kP = 0.003;
+    public static final double kP = 0.08;
     public static final double kI = 0.0;
     public static final double kD = 0.0;
 
@@ -57,9 +57,9 @@ public class AlignToGearPeg extends BaseCommand {
         
         //PID.setInputRange(-1, NetworkTable.getTable("vision/gearpeg").getNumber("camwidth", 320));
         PID.setInputRange(-1, CAMERA_WIDTH);
-        PID.setOutputRange(-.15, .15);
+        PID.setOutputRange(-.5, .5);
 
-        PID.setAbsoluteTolerance(2);
+        PID.setAbsoluteTolerance(10);
 
         //systems.drive.turnOffPID();
     }

@@ -52,16 +52,16 @@ public class MoveToGearPeg extends BaseCommand {
                 },
                 new DriveMotor[]{
                     systems.drive.R0, systems.drive.R1
-                }, -.25, -.25
+                }, -.7, -.7
         );
         
         PID = new PIDController(kP, kI, kD, source, out);
         PID.setToleranceBuffer(8);
         
         PID.setInputRange(-1, CAMERA_WIDTH);
-        PID.setOutputRange(-.03, .03);
+        PID.setOutputRange(-.3, .3);
 
-        PID.setAbsoluteTolerance(3);
+        PID.setAbsoluteTolerance(0);
 
         //systems.drive.turnOffPID();
     }
@@ -72,6 +72,7 @@ public class MoveToGearPeg extends BaseCommand {
     }
 
     protected void execute() {
+        PID.setSetpoint(MIDDLE_OF_CAMERA);
         vals[valsIdx] = source.lastVal;
         valsIdx = (valsIdx + 1) % 20;
     }
@@ -79,7 +80,7 @@ public class MoveToGearPeg extends BaseCommand {
 
     protected boolean isFinished() {
         return false;
-        ///return systems.sensors.ultrasonic.getDistance() <= .5;
+        //return systems.sensors.lidar.getDistance() <= 30;
         //return PID.get() < 0;
     }
 

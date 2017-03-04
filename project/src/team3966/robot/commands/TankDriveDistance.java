@@ -40,12 +40,12 @@ public class TankDriveDistance extends BaseCommand {
 */
     
     // PID constants
-    public static final double kLP = 1.2;
+    public static final double kLP = 2;
     public static final double kLI = 0.0;
     public static final double kLD = 0.0;
     public static final double kLF = 0.0;
 
-    public static final double kRP = 1.2;
+    public static final double kRP = 2;
     public static final double kRI = 0.0;
     public static final double kRD = 0.0;
     public static final double kRF = 0.0;

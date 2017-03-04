@@ -13,6 +13,14 @@ package team3966.robot.commands;
 
 import edu.wpi.first.wpilibj.PIDController;
 import team3966.robot.Robot;
+import static team3966.robot.commands.TankDriveDistance.kLD;
+import static team3966.robot.commands.TankDriveDistance.kLF;
+import static team3966.robot.commands.TankDriveDistance.kLI;
+import static team3966.robot.commands.TankDriveDistance.kLP;
+import static team3966.robot.commands.TankDriveDistance.kRD;
+import static team3966.robot.commands.TankDriveDistance.kRF;
+import static team3966.robot.commands.TankDriveDistance.kRI;
+import static team3966.robot.commands.TankDriveDistance.kRP;
 import team3966.robot.hardware.MotorEncoder;
 import team3966.robot.subsystems.Subsystems;
 import team3966.robot.hardware.Controller;
@@ -32,14 +40,14 @@ public class DriveCircle extends BaseCommand {
     private PIDController LPID, RPID;
 
     // PID constants
-    public static final double kLP = 0.8;
+    public static final double kLP = 2;
     public static final double kLI = 0.0;
-    public static final double kLD = 0.1;
+    public static final double kLD = 0.0;
     public static final double kLF = 0.0;
 
-    public static final double kRP = 0.8;
+    public static final double kRP = 2;
     public static final double kRI = 0.0;
-    public static final double kRD = 0.1;
+    public static final double kRD = 0.0;
     public static final double kRF = 0.0;
 
     private double radius;
@@ -49,18 +57,20 @@ public class DriveCircle extends BaseCommand {
         systems = Robot.subsystems;
         cont = systems.OI.controller;
 
-        radius = _radius;
-
         MotorPIDSource Lsource = new MotorPIDSource(systems.drive.Lenc);
         MotorPIDSource Rsource = new MotorPIDSource(systems.drive.Renc);
         Lsource.useDistance();
         Rsource.useDistance();
 
-        Lsource.setScale(-1);
+        //Lsource.setScale(-1);
+        //Rsource.setScale(-1);
 
         MotorPIDOutput Lout = new MotorPIDOutput(systems.drive.L0, systems.drive.L1);
         MotorPIDOutput Rout = new MotorPIDOutput(systems.drive.R0, systems.drive.R1);
 
+        Lout.setScale(-1);
+        Rout.setScale(-1);
+        
         LPID = new PIDController(kLP, kLI, kLD, kLF, Lsource, Lout);
         LPID.setInputRange(-MotorEncoder.MAX_DISTANCE, MotorEncoder.MAX_DISTANCE);
         LPID.setOutputRange(-1, 1);
@@ -88,8 +98,8 @@ public class DriveCircle extends BaseCommand {
 
     protected void execute() {
         elapsed = (System.nanoTime() - starttime) * Math.pow(10, -9);
-        LPID.setSetpoint(start - (radius + Measures.WHEEL_DISTANCE / 2) * elapsed);
-        RPID.setSetpoint(start - (radius - Measures.WHEEL_DISTANCE / 2) * elapsed);
+        LPID.setSetpoint(start + (radius + Measures.WHEEL_DISTANCE / 2) * elapsed);
+        RPID.setSetpoint(start + (radius - Measures.WHEEL_DISTANCE / 2) * elapsed);
     }
 
     protected void interrupted() {
