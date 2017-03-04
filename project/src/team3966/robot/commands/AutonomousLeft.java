@@ -21,7 +21,7 @@ import team3966.robot.subsystems.Subsystems;
  * @author Ethan Duckworth
  */
 public class AutonomousLeft extends CommandGroup {
-	public AutonomousLeft() {
+    protected void initialize() {
 		Subsystems subsystems = Robot.subsystems;
 		WaitCommand wait = new WaitCommand(10);
 
