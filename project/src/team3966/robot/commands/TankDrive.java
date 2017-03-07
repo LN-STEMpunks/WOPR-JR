@@ -161,14 +161,8 @@ public class TankDrive extends BaseCommand {
             systems.drive.gearBox.disable();
         }
 
-        if (cont.getButton(PS4Buttons.SQUARE)) {
-            systems.drive.mouth.toggle();
-        }
-        
-        
-        if (cont.getButton(PS4Buttons.X)) {
-            systems.drive.gate.toggle();
-        }
+        systems.drive.mouth.set(cont.getButton(PS4Buttons.SQUARE));
+        systems.drive.gate.set(!cont.getButton(PS4Buttons.X));
         
 
         if (cont.getButton(PS4Buttons.TRIANGLE)) {
