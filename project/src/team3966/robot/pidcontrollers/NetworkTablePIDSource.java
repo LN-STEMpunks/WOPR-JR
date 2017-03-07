@@ -33,7 +33,7 @@ public class NetworkTablePIDSource implements PIDSource {
         ntVar = _ntVar;
         nt = NetworkTable.getTable(ntPath);
     }
-
+ 
     public double pidGet() {
         double ret = nt.getNumber(ntVar, 0);
         lastVal = ret;
