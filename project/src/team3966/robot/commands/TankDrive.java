@@ -27,7 +27,7 @@ public class TankDrive extends BaseCommand {
     private Subsystems systems;
 
     private PIDController LPID, RPID;
-
+    private boolean isRestricted = false;
     private boolean enabled = false, inwards = true;
 
     // PID constants
@@ -84,11 +84,48 @@ public class TankDrive extends BaseCommand {
     }
 
     protected void execute() {
+        if (cont.getButton(PS4Buttons.PS)) {
+            isRestricted = !isRestricted;
+        }
+        //Only gear and climber
+        if (isRestricted) {
+            RPID.disable();
+            LPID.disable();
+            restrictedOperation();
+
+        }
+        else {
+            RPID.enable();
+            LPID.enable();
+            normalOperation();
+
+        }
+    }
+    void restrictedOperation() {
+        double Lpow = cont.getAxis(PS4Buttons.STICK_LEFT_Y_AXIS);
+        double Rpow = cont.getAxis(PS4Buttons.STICK_RIGHT_Y_AXIS);
+
+        systems.drive.tank_power(Lpow, Rpow);
+
+        double cpower = cont.getAxis(PS4Buttons.L_TRIGGER_AXIS) + 1;
+
+        systems.drive.climb.set(cpower * cpower);
+
+        if (cont.getButton(PS4Buttons.R1)) {
+            systems.drive.gearBox.enable();
+        } else if (cont.getButton(PS4Buttons.L1)) {
+            systems.drive.gearBox.disable();
+        }
+        
+        systems.drive.mouth.set(cont.getButton(PS4Buttons.SQUARE));
+        systems.drive.gate.set(!cont.getButton(PS4Buttons.X));
+        
+    }
+    void normalOperation() {
 
         double Lpow = cont.getAxis(PS4Buttons.STICK_LEFT_Y_AXIS);
         double Rpow = cont.getAxis(PS4Buttons.STICK_RIGHT_Y_AXIS);
 
-        //systems.drive.tank_power(Lpow, Rpow);
         if (systems.drive.gearBox.get()) {
             LPID.setSetpoint(-Lpow * MotorEncoder.MAX_HIGH_SPEED);
             RPID.setSetpoint(-Rpow * MotorEncoder.MAX_HIGH_SPEED);
@@ -96,31 +133,13 @@ public class TankDrive extends BaseCommand {
             LPID.setSetpoint(-Lpow * MotorEncoder.MAX_LOW_SPEED);
             RPID.setSetpoint(-Rpow * MotorEncoder.MAX_LOW_SPEED);
         }
-        //LPID.setSetpoint(-Lpow * MotorEncoder.MAX_SPEED);
-        //RPID.setSetpoint(-Rpow * MotorEncoder.MAX_SPEED);
-        //LPID.setSetpoint(-Lpow);
-        //RPID.setSetpoint(-Rpow);
 
-        /*
-        SmartDashboard.putData("L Setpoint", LPID);
-        SmartDashboard.putData("R Setpoint", RPID);
-
-        SmartDashboard.putBoolean("L On target", LPID.onTarget());
-        SmartDashboard.putBoolean("R On target", RPID.onTarget());
-
-        */
-
-        // not driving
         double cpower = cont.getAxis(PS4Buttons.L_TRIGGER_AXIS) + 1;
 
         systems.drive.climb.set(cpower * cpower);
         systems.drive.shooter.set(cont.getAxis(PS4Buttons.R_TRIGGER_AXIS) + 1);
-        //systems.drive.shooter.set(1.25);
         systems.drive.stir.set(-.5);
-        //systems.drive.intake.set(.6 + .4 * (Math.abs(Lpow) + Math.abs(Rpow)) / 2.0);
-        //systems.drive.intake.set(.8);
 
-        //if (cont.getPOV(1) >= 0) {
         if (cont.getPOV(0) == 270) {
             enabled = false;
         }
@@ -132,16 +151,6 @@ public class TankDrive extends BaseCommand {
             enabled = true;
             inwards = true;
         }
-        /*
-        if (cont.getPOV(0) == 0 && !enabled) {
-            enabled = true;
-            inwards = false;
-        }  
-        if (cont.getPOV(0) == 180) {
-            enabled = true;
-            inwards = true;
-        }
-        */
         if (enabled) {
             double inpow = .6 + .4 * (Math.abs(Lpow) + Math.abs(Rpow)) / 2.0;
             if (inwards) {
@@ -152,7 +161,6 @@ public class TankDrive extends BaseCommand {
         } else {
             systems.drive.intake.set(0);
         }
-        System.out.printf("enabled: " + enabled + "  inwards: " + inwards +"\n");
          
         
         if (cont.getButton(PS4Buttons.R1)) {
@@ -160,18 +168,10 @@ public class TankDrive extends BaseCommand {
         } else if (cont.getButton(PS4Buttons.L1)) {
             systems.drive.gearBox.disable();
         }
-
         systems.drive.mouth.set(cont.getButton(PS4Buttons.SQUARE));
         systems.drive.gate.set(!cont.getButton(PS4Buttons.X));
-        
-
-        if (cont.getButton(PS4Buttons.TRIANGLE)) {
-            systems.drive.gate.enable();
-        } else if (cont.getButton(PS4Buttons.CIRCLE) && !systems.drive.mouth.last) {
-            systems.drive.gate.disable();
-        }
     }
-
+    
     protected void interrupted() {
         end();
     }
