@@ -16,8 +16,9 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj.DriverStation;
 import team3966.robot.commands.AlignToGearPeg;
-
+import edu.wpi.first.wpilibj.networktables.NetworkTable;
 import team3966.robot.subsystems.Subsystems;
 import team3966.robot.commands.LeftSide;
 import team3966.robot.commands.MiddleSide;
@@ -42,15 +43,14 @@ import team3966.robot.commands.MoveToGearPeg;
 public class Robot extends IterativeRobot {
 
     public static Subsystems subsystems;
-    
     SendableChooser autoChooser;
+    NetworkTable nt;
     Command autonomousCommand;
     Command teleopCommand;
-
     public void robotInit() {
+        nt = NetworkTable.getTable("vision");
         subsystems = new Subsystems();
         teleopCommand = new TankDrive();
-        
         autoChooser = new SendableChooser();
         autoChooser.addObject("Circle (1m)", new DriveCircle(1));
         autoChooser.addObject("Circle (2m)", new DriveCircle(2));
@@ -69,7 +69,8 @@ public class Robot extends IterativeRobot {
         autoChooser.addObject("2 Left Hoppers Right Position", new Hopper2Right());
     */
         SmartDashboard.putData("Auto Program", autoChooser);
-        
+        //DriverStation.Alliance color = DriverStation
+
     }
 
     public void disabledInit() {

@@ -19,7 +19,6 @@ import java.util.Arrays;
 public class Subsystems {
     
     public NetworkTable infoTable;
-
     public Drive drive;
     public OI OI;
     public Sensors sensors;
@@ -32,7 +31,6 @@ public class Subsystems {
         OI = new OI();
         
         infoTable = NetworkTable.getTable("info");
-
         sensors = new Sensors();
     }
 
@@ -62,6 +60,9 @@ public class Subsystems {
             SmartDashboard.getNumber("Diffence between the two values", sensors.getLidarDifference());
             SmartDashboard.getNumber("What the value should be: 2.5399986284 or similar.", 0);
             infoTable.putNumber("BatteryVoltage", DriverStation.getInstance().getBatteryVoltage());
+            DriverStation ds = DriverStation.getInstance();
+            DriverStation.Alliance color = ds.getAlliance();
+            infoTable.putNumber("color", color.ordinal());
         }
     }
 }
