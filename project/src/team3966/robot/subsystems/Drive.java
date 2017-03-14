@@ -13,6 +13,7 @@ package team3966.robot.subsystems;
 
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import team3966.robot.hardware.DriveMotor;
 import team3966.robot.hardware.MotorEncoder;
 
@@ -67,8 +68,11 @@ public class Drive extends Subsystem {
         R0 = new DriveMotor(IDs.R0Motor);
         R1 = new DriveMotor(IDs.R1Motor);
 
-        R0.setInverted(true);
-        R1.setInverted(true);
+        L0.setInverted(true);
+        L1.setInverted(true);
+        
+        R0.setInverted(false);
+        R1.setInverted(false);
 
     }
 
@@ -86,6 +90,9 @@ public class Drive extends Subsystem {
 
     // using raw power
     public void tank_power(double L_power, double R_power) {
+        
+        //SmartDashboard.putString("Powers: ", "" + L_power + ", " + R_power);
+
         L0.set(L_power);
         L1.set(L_power);
 

@@ -14,14 +14,15 @@ package team3966.robot.commands;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
-public class AutonomousLeft extends CommandGroup {
+public class AutonomousRight extends CommandGroup {
 
-    public AutonomousLeft() {
+    public AutonomousRight() {
         addSequential(new TankDriveTimed(.42, .42, 1.8));
-        addSequential(new TankDriveAngle(60));
+        addSequential(new TankDriveAngle(-60));
+        //addSequential(new TankDriveTimed(.5, .5, 2.0));
         addSequential(new MoveToGearPeg());
         addSequential(new PutGearOnPeg());
-        addSequential(new TankDriveTimed(-.48, -.42, 1.2));
-        addSequential(new TankDriveAngle(-60));
+        addSequential(new TankDriveTimed(-.42, -.42, 1.2));
+        addSequential(new TankDriveAngle(60));
     }
 }

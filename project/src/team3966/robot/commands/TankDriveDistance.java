@@ -63,14 +63,19 @@ public class TankDriveDistance extends BaseCommand {
         MotorPIDSource Rsource = new MotorPIDSource(systems.drive.Renc);
         Lsource.useDistance();
         Rsource.useDistance();
+        
 
         //Lsource.setScale(-1);
+        
+        //maybe use this line
         //Rsource.setScale(-1);
 
         MotorPIDOutput Lout = new MotorPIDOutput(systems.drive.L0, systems.drive.L1);
         MotorPIDOutput Rout = new MotorPIDOutput(systems.drive.R0, systems.drive.R1);
-
+        
         Lout.setScale(-1);
+        
+        // maybe change scale here
         Rout.setScale(-1);
         
         LPID = new PIDController(kLP, kLI, kLD, kLF, Lsource, Lout);

@@ -44,7 +44,7 @@ public class MoveToGearPeg extends BaseCommand {
         systems = Robot.subsystems;
         cont = systems.OI.controller;
 
-        source = new NetworkTablePIDSource("vision/gearpeg", "x");
+        source = new NetworkTablePIDSource("vision", "x");
 
         MotorTurnAndMovePIDOutput out = new MotorTurnAndMovePIDOutput(
                 new DriveMotor[]{
@@ -52,11 +52,12 @@ public class MoveToGearPeg extends BaseCommand {
                 },
                 new DriveMotor[]{
                     systems.drive.R0, systems.drive.R1
-                }, -.7, -.7
+                }, .7, .7
         );
+        out.setScale(-1);
         
         PID = new PIDController(kP, kI, kD, source, out);
-        PID.setToleranceBuffer(8);
+        PID.setToleranceBuffer(6);
         
         PID.setInputRange(-1, CAMERA_WIDTH);
         PID.setOutputRange(-.3, .3);
@@ -73,14 +74,13 @@ public class MoveToGearPeg extends BaseCommand {
 
     protected void execute() {
         PID.setSetpoint(MIDDLE_OF_CAMERA);
-        vals[valsIdx] = source.lastVal;
-        valsIdx = (valsIdx + 1) % 20;
     }
 
 
     protected boolean isFinished() {
-        return false;
-        //return systems.sensors.lidar.getDistance() <= 30;
+        //return false;
+        double ld = systems.sensors.lidar.getDistance();
+        return ld <= 23 && ld > 2;
         //return PID.get() < 0;
     }
 
