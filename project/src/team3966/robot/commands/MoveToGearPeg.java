@@ -31,6 +31,8 @@ public class MoveToGearPeg extends BaseCommand {
     private double[] vals = new double[20];
     private int valsIdx = 0;
 
+
+    private boolean turnRight;
     // PID constants
     public static final double kP = 0.03;
     public static final double kI = 0.0;
@@ -39,12 +41,13 @@ public class MoveToGearPeg extends BaseCommand {
     public static final double CAMERA_WIDTH = 320;
     public static final double MIDDLE_OF_CAMERA = 160;
 
-    public MoveToGearPeg() {
+    public MoveToGearPeg(boolean _turnRight) {
         super(Robot.subsystems.drive);
         systems = Robot.subsystems;
         cont = systems.OI.controller;
+        turnRight = _turnRight;
 
-        source = new NetworkTablePIDSource("vision", "x");
+        source = new NetworkTablePIDSource("vision/gearpeg", "x", turnRight);
 
         MotorTurnAndMovePIDOutput out = new MotorTurnAndMovePIDOutput(
                 new DriveMotor[]{

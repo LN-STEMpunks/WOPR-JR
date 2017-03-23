@@ -33,7 +33,7 @@ public class TankDriveAngle extends BaseCommand {
     // PID constants
     public static final double kP = .03;
     public static final double kI = 0.0;
-    public static final double kD = 0.00;
+    public static final double kD = 0.0;
 
     private double angle;
 
@@ -61,7 +61,7 @@ public class TankDriveAngle extends BaseCommand {
         PID.setContinuous(true);
         PID.setOutputRange(-1, 1);
 
-        PID.setAbsoluteTolerance(2);
+        PID.setAbsoluteTolerance(4);
     }
 
     protected void initialize() {

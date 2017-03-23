@@ -20,17 +20,24 @@ import team3966.robot.commands.AlignToGearPeg;
 import edu.wpi.first.wpilibj.networktables.NetworkTable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import team3966.robot.commands.AutonomousCenter;
-import team3966.robot.commands.AutonomousLeft;
-import team3966.robot.commands.AutonomousRight;
-import team3966.robot.commands.DoNothing;
+
 import team3966.robot.subsystems.Subsystems;
+
+import team3966.robot.commands.RedAutonomousCenter;
+import team3966.robot.commands.RedAutonomousLeft;
+import team3966.robot.commands.RedAutonomousRight;
+
+import team3966.robot.commands.BlueAutonomousCenter;
+import team3966.robot.commands.BlueAutonomousLeft;
+import team3966.robot.commands.BlueAutonomousRight;
+
+import team3966.robot.commands.DoNothing;
 import team3966.robot.commands.DriveCircle;
+
 import team3966.robot.commands.TankDrive;
 import team3966.robot.commands.TankDriveAngle;
 import team3966.robot.commands.TankDriveDistance;
-import team3966.robot.commands.MoveToGearPeg;
-import team3966.robot.commands.SetSolenoids;
+
 import team3966.robot.commands.TankDriveTimed;
 
 /**
@@ -62,25 +69,14 @@ public class Robot extends IterativeRobot {
         //autoChooser.addObject("Drive forward (2m)", new TankDriveDistance(2, 2));
         //autoChooser.addObject("Turn (90 d)", new TankDriveAngle(90));
         
-        autoChooser.addObject("Auto Center", new AutonomousCenter());
-        autoChooser.addObject("Auto Left", new AutonomousLeft());
-        autoChooser.addObject("Auto Right", new AutonomousRight());
-        /*
-        autoChooser.addObject("Align To Gearpeg", new AlignToGearPeg());
-        autoChooser.addObject("Move To Gearpeg", new MoveToGearPeg());*/
-        
-        //autoChooser.addObject("Set Pnem", new SetSolenoids(true, false));
-        //autoChooser.addObject("Auto Left !RISKY!", new AutonomousLeft());
-        //autoChooser.addObject("Align to Gear ", new AlignToGearPeg());
-        //autoChooser.addObject("Move to Gear ", new MoveToGearPeg());
-        /*
-        autoChooser.addObject("3 Left Hoppers Left Position", new LeftSide());
-        autoChooser.addObject("3 Left Hoppers Middle Position", new MiddleSide());
-        autoChooser.addObject("3 Left Hoppers Right Position", new RightSide());
-        autoChooser.addObject("2 Left Hoppers Left Position", new Hopper2Left());
-        autoChooser.addObject("2 Left Hoppers Middle Position", new Hopper2Middle());
-        autoChooser.addObject("2 Left Hoppers Right Position", new Hopper2Right());
-         */
+        autoChooser.addObject("Red Left", new RedAutonomousLeft());
+        autoChooser.addObject("Red Center", new RedAutonomousCenter());
+        autoChooser.addObject("Red Right", new RedAutonomousRight());
+                
+        autoChooser.addObject("Blue Left", new BlueAutonomousLeft());
+        autoChooser.addObject("Blue Center", new BlueAutonomousCenter());
+        autoChooser.addObject("Blue Right", new BlueAutonomousRight());
+
         SmartDashboard.putData("Auto Program", autoChooser);
         //DriverStation.Alliance color = DriverStation
 

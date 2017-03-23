@@ -27,21 +27,22 @@ public class AlignToGearPeg extends BaseCommand {
     private NetworkTablePIDSource source;
 
     private double[] vals = new double[20];
+    private boolean turnRight;
     private int valsIdx = 0;
 
     // PID constants
-    public static final double kP = 0.08;
+    public static final double kP = 0.05;
     public static final double kI = 0.0;
     public static final double kD = 0.0;
 
     public static final double CAMERA_WIDTH = 320;
     public static final double MIDDLE_OF_CAMERA = 160;
 
-    public AlignToGearPeg() {
+    public AlignToGearPeg(boolean _turnRight) {
         super(Robot.subsystems.drive);
         systems = Robot.subsystems;
-
-        source = new NetworkTablePIDSource("vision", "x");
+        turnRight = _turnRight;
+        source = new NetworkTablePIDSource("vision/gearpeg", "x", turnRight);
 
         MotorTurnPIDOutput out = new MotorTurnPIDOutput(
                 new DriveMotor[]{
@@ -51,14 +52,14 @@ public class AlignToGearPeg extends BaseCommand {
                     systems.drive.R0, systems.drive.R1
                 }
         );
-        //out.setScale(-1);
+        out.setScale(-1);
 
         PID = new PIDController(kP, kI, kD, source, out);
         PID.setToleranceBuffer(5);
         
         //PID.setInputRange(-1, NetworkTable.getTable("vision/gearpeg").getNumber("camwidth", 320));
         PID.setInputRange(-1, CAMERA_WIDTH);
-        PID.setOutputRange(-.5, .5);
+        PID.setOutputRange(-.35, .35);
 
         PID.setAbsoluteTolerance(5);
 

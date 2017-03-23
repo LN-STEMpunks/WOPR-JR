@@ -113,26 +113,22 @@ public class TankDrive extends BaseCommand {
         double Rpow = -cont.getAxis(PS4Buttons.STICK_RIGHT_Y_AXIS);
         systems.drive.tank_power(Lpow, Rpow);
 
-        systems.drive.stir.set(-.8);
-
-        double low_power = cont.getAxis(PS4Buttons.L_TRIGGER_AXIS) + 1;
-        double high_power = cont.getAxis(PS4Buttons.R_TRIGGER_AXIS) + 1;
-        if (low_power < .2 || high_power < .2) {
-            
-            if (low_power > high_power) {
-                systems.drive.climb.set(.15 * low_power);
-            } else if (high_power > low_power) {
-                systems.drive.climb.set(high_power);
-            } else {
-                systems.drive.climb.set(0);
-            }
-            systems.drive.climb.set(0); 
-
+        double Spow = cont.getAxis(PS4Buttons.R_TRIGGER_AXIS) + 1;
+        if (Spow != 1) {
+            systems.drive.shooter.set(Spow);
+            systems.drive.stir.set(-Spow * .55);
         } else {
-            systems.drive.shooter.set(high_power);
-            systems.drive.climb.set(high_power);
+            systems.drive.shooter.set(0);
+            systems.drive.stir.set(0);
         }
-        
+
+        if (cont.getButton(PS4Buttons.TRIANGLE)) {
+            systems.drive.climb.set(.2);
+        } else if (cont.getButton(PS4Buttons.CIRCLE)) {
+            systems.drive.climb.set(1);
+        } else {
+            systems.drive.climb.set(0);
+        }
 
         if (cont.getButton(PS4Buttons.R1)) {
             systems.drive.gearBox.enable();
@@ -161,7 +157,6 @@ public class TankDrive extends BaseCommand {
         } else {
             systems.drive.intake.set(0);
         }
-        systems.drive.shooter.set(cont.getButton(PS4Buttons.TRIANGLE) ? 1 : 0);
         
         systems.drive.mouth.set(cont.getButton(PS4Buttons.SQUARE));
         systems.drive.gate.set(!cont.getButton(PS4Buttons.X));

@@ -25,17 +25,23 @@ public class NetworkTablePIDSource implements PIDSource {
     
     public double lastVal = 0;
 
+    private boolean turnRight;
+
     // by default, do distance
     private PIDSourceType sourceType = PIDSourceType.kDisplacement;
 
-    public NetworkTablePIDSource(String _ntPath, String _ntVar) {
+    public NetworkTablePIDSource(String _ntPath, String _ntVar, boolean _turnRight) {
         ntPath = _ntPath;
         ntVar = _ntVar;
+        turnRight = _turnRight;
         nt = NetworkTable.getTable(ntPath);
     }
  
     public double pidGet() {
         double ret = nt.getNumber(ntVar, 0);
+        if (turnRight && ret < 0) {
+            ret = 10000;
+        }
         lastVal = ret;
         //SmartDashboard.putNumber("PID Get NT", ret);
         return ret;
