@@ -44,6 +44,7 @@ public class Subsystems {
 
             SmartDashboard.putNumber("Yaw: ", sensors.navX.getYaw());
             SmartDashboard.putNumber("Pitch: ", sensors.navX.getPitch());
+            SmartDashboard.putNumber("UltraSonic", sensors.ultrasonic.getDistance());
             SmartDashboard.putNumber("Lidar Distance (cm)", sensors.lidar.getDistance());
 
             /*SmartDashboard.putString("PDP Current: ", Arrays.toString(sensors.pdp.channelCurrent()));

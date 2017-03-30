@@ -17,7 +17,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class RedAutonomousLeft extends CommandGroup {
 
     public RedAutonomousLeft() {
-        addSequential(new TankDriveTimed(.42, .42, 2));
+        addSequential(new TankDriveTimed(.55, .55, 2.4));
         addSequential(new AlignToGearPeg(true));
         addSequential(new MoveToGearPeg(true));
         addSequential(new PutGearOnPeg());

@@ -39,6 +39,7 @@ import team3966.robot.commands.TankDriveAngle;
 import team3966.robot.commands.TankDriveDistance;
 
 import team3966.robot.commands.TankDriveTimed;
+import team3966.robot.commands.Test;
 
 /**
  * Our 2017 robot code
@@ -65,6 +66,7 @@ public class Robot extends IterativeRobot {
         //autoChooser.addObject("Circle (2m)", new DriveCircle(2));
 
         autoChooser.addObject("Drive forward (slow)", new TankDriveTimed(.5, .5, 3));
+        autoChooser.addObject("Test (do not use)", new Test());
         //autoChooser.addObject("Drive forward (1m)", new TankDriveDistance(1, 1));
         //autoChooser.addObject("Drive forward (2m)", new TankDriveDistance(2, 2));
         //autoChooser.addObject("Turn (90 d)", new TankDriveAngle(90));

@@ -14,10 +14,10 @@ package team3966.robot.commands;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
-public class BlueAutonomousRight extends CommandGroup {
+public class Test extends CommandGroup {
 
-    public BlueAutonomousRight() {
-        addSequential(new TankDriveTimed(.42, .42, 2));
+    public Test() {
+        addSequential(new AlignToGearPeg(false));
         addSequential(new MoveToGearPeg(false));
         addSequential(new PutGearOnPeg());
     }

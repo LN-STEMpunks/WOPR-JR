@@ -18,7 +18,7 @@ import team3966.robot.subsystems.Subsystems;
 public class BlueAutonomousCenter extends CommandGroup {
 
     public BlueAutonomousCenter() {
-        addSequential(new TankDriveTimed(.6, .6, 3));
+        addSequential(new MoveToGearPeg(false));
         addSequential(new PutGearOnPeg());
 
     }

@@ -31,15 +31,16 @@ public class MoveToGearPeg extends BaseCommand {
     private double[] vals = new double[20];
     private int valsIdx = 0;
 
+    private long stime;
 
     private boolean turnRight;
     // PID constants
-    public static final double kP = 0.03;
+    public static final double kP = 0.1;
     public static final double kI = 0.0;
     public static final double kD = 0.0;
 
     public static final double CAMERA_WIDTH = 320;
-    public static final double MIDDLE_OF_CAMERA = 160;
+    public static final double MIDDLE_OF_CAMERA = 180;
 
     public MoveToGearPeg(boolean _turnRight) {
         super(Robot.subsystems.drive);
@@ -55,15 +56,15 @@ public class MoveToGearPeg extends BaseCommand {
                 },
                 new DriveMotor[]{
                     systems.drive.R0, systems.drive.R1
-                }, .7, .7
+                }, .38, .38
         );
         out.setScale(-1);
         
         PID = new PIDController(kP, kI, kD, source, out);
-        PID.setToleranceBuffer(6);
+        PID.setToleranceBuffer(4);
         
         PID.setInputRange(-1, CAMERA_WIDTH);
-        PID.setOutputRange(-.3, .3);
+        PID.setOutputRange(-.1, .1);
 
         PID.setAbsoluteTolerance(0);
 
@@ -71,6 +72,7 @@ public class MoveToGearPeg extends BaseCommand {
     }
 
     protected void initialize() {
+        stime = System.nanoTime();
         PID.enable();
         PID.setSetpoint(MIDDLE_OF_CAMERA);
     }
@@ -83,7 +85,7 @@ public class MoveToGearPeg extends BaseCommand {
     protected boolean isFinished() {
         //return false;
         double ld = systems.sensors.lidar.getDistance();
-        return ld <= 23 && ld > 2;
+        return (ld <= 30 && ld > 2) || ((System.nanoTime() - stime) * Math.pow(10, -9) > 6) || (systems.sensors.ultrasonic.getDistance() < 0.125);
         //return PID.get() < 0;
     }
 

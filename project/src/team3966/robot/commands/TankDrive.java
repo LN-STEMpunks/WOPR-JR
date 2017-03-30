@@ -121,14 +121,20 @@ public class TankDrive extends BaseCommand {
             systems.drive.shooter.set(0);
             systems.drive.stir.set(0);
         }
-
+        double Cpow = cont.getAxis(PS4Buttons.L_TRIGGER_AXIS) + 1;
+        if (Cpow != 1) {
+            systems.drive.climb.set(Cpow);
+        } else {
+            systems.drive.climb.set(0);
+        }
+        /*
         if (cont.getButton(PS4Buttons.TRIANGLE)) {
             systems.drive.climb.set(.2);
         } else if (cont.getButton(PS4Buttons.CIRCLE)) {
             systems.drive.climb.set(1);
         } else {
             systems.drive.climb.set(0);
-        }
+        }*/
 
         if (cont.getButton(PS4Buttons.R1)) {
             systems.drive.gearBox.enable();

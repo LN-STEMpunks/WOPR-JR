@@ -17,7 +17,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class BlueAutonomousRight extends CommandGroup {
 
     public BlueAutonomousRight() {
-        addSequential(new TankDriveTimed(.42, .42, 2));
+        addSequential(new TankDriveTimed(.63, .63, 2));
         addSequential(new MoveToGearPeg(false));
         addSequential(new PutGearOnPeg());
     }

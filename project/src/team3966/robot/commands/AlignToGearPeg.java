@@ -30,13 +30,15 @@ public class AlignToGearPeg extends BaseCommand {
     private boolean turnRight;
     private int valsIdx = 0;
 
+    private long stime;
+    
     // PID constants
-    public static final double kP = 0.05;
+    public static final double kP = 0.02;
     public static final double kI = 0.0;
     public static final double kD = 0.0;
 
     public static final double CAMERA_WIDTH = 320;
-    public static final double MIDDLE_OF_CAMERA = 160;
+    public static final double MIDDLE_OF_CAMERA = 180;
 
     public AlignToGearPeg(boolean _turnRight) {
         super(Robot.subsystems.drive);
@@ -57,47 +59,28 @@ public class AlignToGearPeg extends BaseCommand {
         PID = new PIDController(kP, kI, kD, source, out);
         PID.setToleranceBuffer(5);
         
-        //PID.setInputRange(-1, NetworkTable.getTable("vision/gearpeg").getNumber("camwidth", 320));
         PID.setInputRange(-1, CAMERA_WIDTH);
-        PID.setOutputRange(-.35, .35);
+        PID.setOutputRange(-.4, .4);
 
-        PID.setAbsoluteTolerance(5);
-
-        //systems.drive.turnOffPID();
+        PID.setAbsoluteTolerance(10);
     }
 
     protected void initialize() {
         PID.enable();
+        stime = System.nanoTime();
         PID.setSetpoint(MIDDLE_OF_CAMERA);
-        //double width = (NetworkTable.getTable("vision/gearpeg").getNumber("camwidth", 320));
-        //PID.setInputRange(0, width);
-        //PID.setSetpoint(width / 2.0);
     }
 
     protected boolean isFinished() {
     	//return false;
-        return PID.onTarget();
-    }
-
-    // if it has wiggled accross too much.
-    // We need this method because of latency, the PID loop doesn't work with NT values :(
-    private boolean hasWiggled() {
-        int changes = 0;
-        for (int i = 1; i < vals.length; ++i) {
-            if (Math.signum(vals[i] - PID.getSetpoint()) != Math.signum(vals[i - 1] - PID.getSetpoint())) {
-                changes++;
-            }
-        }
-        return changes >= 2;
+        return PID.onTarget() || (System.nanoTime() - stime) * Math.pow(10, -9) > 2.8;
     }
 
     protected void execute() {
-        vals[valsIdx] = source.lastVal;
-        valsIdx = (valsIdx + 1) % 20;
-        //PID.setSetpoint();
-        /*if (PID.onTarget()) {
+        PID.setSetpoint(MIDDLE_OF_CAMERA);
+        if (PID.onTarget()) {
             end();
-        }*/
+        }
     }
 
     protected void interrupted() {
