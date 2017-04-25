@@ -93,6 +93,7 @@ public class Robot extends IterativeRobot {
         //teleopCommand.cancel();
         autonomousCommand = (Command) autoChooser.getSelected();
         if (autonomousCommand != null) {
+            subsystems.drive.gearBox.set(false);
             autonomousCommand.start();
         }
     }
